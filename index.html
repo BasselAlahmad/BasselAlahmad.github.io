@@ -15,46 +15,75 @@
                     fontFamily: {
                         sans: ['Cairo', 'sans-serif'],
                         mono: ['Fira Code', 'monospace'],
-                    },
-                    colors: {
-                        cyber: {
-                            bg: '#060a12',
-                            surface: '#0d1424',
-                            card: '#111b2e',
-                            border: '#1e293b',
-                            emerald: '#10b981',
-                            cyan: '#06b6d4',
-                        }
                     }
                 }
             }
         }
     </script>
     <style>
+        :root {
+            --accent: #10b981;
+            --accent-glow: rgba(16, 185, 129, 0.28);
+            --accent-soft: rgba(16, 185, 129, 0.12);
+            --secondary: #06b6d4;
+            --bg-main: #050811;
+            --bg-card: rgba(15, 23, 42, 0.78);
+        }
+        [data-theme="royal"] {
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --accent-soft: rgba(59, 130, 246, 0.12);
+            --secondary: #38bdf8;
+            --bg-main: #060b19;
+            --bg-card: rgba(15, 23, 42, 0.82);
+        }
+        [data-theme="gold"] {
+            --accent: #f59e0b;
+            --accent-glow: rgba(245, 158, 11, 0.28);
+            --accent-soft: rgba(245, 158, 11, 0.12);
+            --secondary: #fbbf24;
+            --bg-main: #09090b;
+            --bg-card: rgba(24, 24, 27, 0.82);
+        }
         body {
-            background-color: #060a12;
+            background-color: var(--bg-main);
             color: #e2e8f0;
             overflow-x: hidden;
+            transition: background-color 0.35s ease;
         }
         .pcb-pattern {
             background-image: 
-                radial-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px),
-                linear-gradient(to right, rgba(30, 41, 59, 0.2) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(30, 41, 59, 0.2) 1px, transparent 1px);
-            background-size: 24px 24px, 96px 96px, 96px 96px;
+                radial-gradient(var(--accent-soft) 1.25px, transparent 1.25px),
+                linear-gradient(to right, rgba(30, 41, 59, 0.22) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 41, 59, 0.22) 1px, transparent 1px);
+            background-size: 28px 28px, 112px 112px, 112px 112px;
         }
         .glass-panel {
-            background: rgba(17, 27, 46, 0.75);
-            backdrop-filter: blur(12px);
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        }
+        .accent-text { color: var(--accent); }
+        .accent-bg { background-color: var(--accent); }
+        .accent-border { border-color: var(--accent); }
+        .accent-badge {
+            background-color: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid var(--accent);
         }
         .card-hover {
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .card-hover:hover {
-            transform: translateY(-4px);
-            border-color: #10b981;
-            box-shadow: 0 12px 30px -10px rgba(16, 185, 129, 0.25);
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 16px 36px -10px var(--accent-glow);
+        }
+        .hero-gradient-text {
+            background: linear-gradient(135deg, #ffffff 20%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .timeline-line::before {
             content: '';
@@ -63,76 +92,72 @@
             bottom: 0;
             right: 15px;
             width: 2px;
-            background: linear-gradient(to bottom, #10b981, #06b6d4, #1e293b);
+            background: linear-gradient(to bottom, var(--accent), var(--secondary), #1e293b);
         }
-        /* إعدادات الطباعة وتصدير PDF لمدراء التوظيف HR */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
         @media print {
-            body {
-                background: #ffffff !important;
-                color: #0f172a !important;
-                font-size: 11pt;
-            }
-            .no-print {
-                display: none !important;
-            }
-            .glass-panel, .bg-cyber-card, .bg-cyber-surface {
-                background: #ffffff !important;
-                border: 1px solid #cbd5e1 !important;
-                box-shadow: none !important;
-                color: #0f172a !important;
-            }
-            .text-white, .text-slate-200, .text-slate-300, .text-slate-400 {
-                color: #1e293b !important;
-            }
-            .text-emerald-400, .text-cyan-400 {
-                color: #047857 !important;
-                font-weight: bold !important;
-            }
-            section, header {
-                padding-top: 1rem !important;
-                padding-bottom: 1rem !important;
-                page-break-inside: avoid;
-            }
+            body { background: #ffffff !important; color: #0f172a !important; font-size: 11pt; }
+            .no-print { display: none !important; }
+            .glass-panel { background: #ffffff !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; color: #0f172a !important; }
+            .text-white, .text-slate-200, .text-slate-300, .text-slate-400 { color: #1e293b !important; }
+            section, header { padding-top: 1rem !important; padding-bottom: 1rem !important; page-break-inside: avoid; }
         }
     </style>
 </head>
 <body class="pcb-pattern font-sans antialiased selection:bg-emerald-500 selection:text-slate-950">
 
+    <!-- Ambient Background Glows -->
+    <div class="fixed top-0 right-1/4 w-96 h-96 rounded-full blur-[150px] pointer-events-none opacity-25 accent-bg no-print"></div>
+    <div class="fixed bottom-0 left-1/4 w-96 h-96 bg-cyan-500 rounded-full blur-[160px] pointer-events-none opacity-15 no-print"></div>
+
     <!-- Top Navigation Bar -->
     <nav class="fixed top-0 w-full z-50 glass-panel border-b border-slate-800/80 no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-mono font-bold">
+                <div class="w-10 h-10 rounded-xl accent-badge flex items-center justify-center font-mono font-black text-base shadow-inner">
                     BS
                 </div>
                 <div>
-                    <span class="font-mono font-bold text-lg tracking-wider text-white block leading-none">BS<span class="text-emerald-400">.Tech</span> <span class="text-xs text-slate-400 font-normal">HUB v2.6</span></span>
-                    <span class="text-[11px] text-slate-400 block mt-0.5">البوابة التقنية والملف المهني الرسمي</span>
+                    <span class="font-mono font-bold text-lg tracking-wider text-white block leading-none">BS<span class="accent-text">.Tech</span> <span class="text-[11px] text-slate-400 font-normal">PRO v3.0</span></span>
+                    <span class="text-[11px] text-slate-400 block mt-0.5">البوابة الهندسية والملف المهني الرسمي</span>
                 </div>
             </div>
 
-            <div class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-300">
-                <a href="#executive-profile" class="hover:text-emerald-400 transition">الملف التنفيذي</a>
-                <a href="#career-timeline" class="hover:text-emerald-400 transition">السجل المهني (HR)</a>
-                <a href="#skills-matrix" class="hover:text-emerald-400 transition">المصفوفة الهندسية</a>
-                <a href="#projects-hub" class="hover:text-emerald-400 transition flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> بوابة المشاريع والأنظمة
+            <div class="hidden xl:flex items-center gap-6 text-sm font-semibold text-slate-300">
+                <a href="#executive-profile" class="hover:text-white transition">الملف التنفيذي</a>
+                <a href="#career-timeline" class="hover:text-white transition">السجل المهني (HR)</a>
+                <a href="#skills-matrix" class="hover:text-white transition">المصفوفة الهندسية</a>
+                <a href="#projects-hub" class="hover:text-white transition flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full accent-bg animate-ping"></span> المشاريع والأنظمة
                 </a>
-                <a href="#terminal-lab" class="hover:text-emerald-400 transition">المختبر التفاعلي</a>
+                <a href="#terminal-lab" class="hover:text-white transition">المختبر التفاعلي</a>
+                <a href="#remote-support" class="hover:text-white transition">طلب دعم AnyDesk</a>
             </div>
 
-            <div class="flex items-center gap-2.5">
-                <button onclick="toggleCommandPalette()" title="لوحة الأوامر السريعة (Ctrl + K)" class="bg-slate-800/90 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg text-xs font-mono border border-slate-700 transition flex items-center gap-2">
-                    <i class="fa-solid fa-terminal text-emerald-400"></i>
-                    <span class="hidden sm:inline">بحث سريع</span>
-                    <kbd class="bg-slate-950 px-1.5 py-0.5 rounded text-[10px] text-slate-400">Ctrl+K</kbd>
+            <div class="flex items-center gap-2">
+                <!-- Live Theme Switcher -->
+                <div class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-700/80" title="تغيير السمة اللونية">
+                    <button onclick="setTheme('cyber')" class="w-6 h-6 rounded-lg bg-emerald-500 hover:scale-110 transition" title="الأخضر السيبراني"></button>
+                    <button onclick="setTheme('royal')" class="w-6 h-6 rounded-lg bg-blue-500 hover:scale-110 transition mx-1" title="الأزرق المؤسسي"></button>
+                    <button onclick="setTheme('gold')" class="w-6 h-6 rounded-lg bg-amber-500 hover:scale-110 transition" title="الذهبي التنفيذي"></button>
+                </div>
+
+                <button onclick="toggleCommandPalette()" title="لوحة الأوامر السريعة (Ctrl + K)" class="bg-slate-900/90 hover:bg-slate-800 text-slate-300 px-3 py-2 rounded-xl text-xs font-mono border border-slate-700 transition flex items-center gap-2">
+                    <i class="fa-solid fa-terminal accent-text"></i>
+                    <kbd class="hidden sm:inline bg-slate-950 px-1.5 py-0.5 rounded text-[10px] text-slate-400">Ctrl+K</kbd>
                 </button>
-                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold px-3.5 py-2 rounded-lg text-xs border border-slate-700 transition flex items-center gap-1.5">
+
+                <button onclick="window.print()" class="bg-slate-900/90 hover:bg-slate-800 text-white font-semibold px-3 py-2 rounded-xl text-xs border border-slate-700 transition flex items-center gap-1.5">
                     <i class="fa-solid fa-file-pdf text-rose-400"></i>
-                    <span class="hidden sm:inline">نسخة HR / PDF</span>
+                    <span class="hidden md:inline">نسخة HR</span>
                 </button>
-                <a href="#contact-gateway" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-4 py-2 rounded-lg text-xs sm:text-sm transition flex items-center gap-1.5 shadow-lg shadow-emerald-500/20">
-                    <i class="fa-solid fa-headset"></i> تواصل مباشر
+
+                <a href="#remote-support" class="accent-bg text-slate-950 font-black px-4 py-2 rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 shadow-lg hover:opacity-90">
+                    <i class="fa-solid fa-headset"></i> دعم فوري
                 </a>
             </div>
         </div>
@@ -142,15 +167,14 @@
     <header id="executive-profile" class="pt-28 pb-16 px-4 sm:px-6 max-w-7xl mx-auto">
         <div class="grid lg:grid-cols-12 gap-10 items-center">
             
-            <!-- Right Column: Bio & HR Value Proposition -->
             <div class="lg:col-span-7 space-y-6">
-                <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full accent-badge text-xs font-mono">
+                    <span class="w-2 h-2 rounded-full accent-bg animate-pulse"></span>
                     <span>SENIOR IT SUPPORT SPECIALIST & HARDWARE/FIRMWARE ENGINEER</span>
                 </div>
 
-                <div class="space-y-2">
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+                <div class="space-y-3">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black hero-gradient-text tracking-tight leading-tight">
                         باسل محمد الأحمد
                     </h1>
                     <p class="text-lg sm:text-xl text-cyan-400 font-bold">
@@ -158,28 +182,27 @@
                     </p>
                 </div>
 
-                <p class="text-slate-300 leading-relaxed text-base sm:text-lg border-r-4 border-emerald-500 pr-4 bg-slate-900/40 py-2 rounded-l-lg">
-                    خبرة هندسية وميدانية تتجاوز <strong class="text-white">14 عاماً</strong> في قيادة عمليات الدعم التقني المتقدم، صيانة اللوحات الإلكترونية على مستوى المكونات الدقيقة (<span class="font-mono text-emerald-400">Component-Level</span>)، الهندسة العكسية وبرمجة شرائح <span class="font-mono text-emerald-400">EEPROM / SPI Flash</span>، وأتمتة نشر أنظمة التشغيل والشبكات على نطاق مؤسسي واسع، مع خلفية أكاديمية في إدارة الأعمال تضمن مواءمة الحلول التقنية مع كفاءة التشغيل المؤسسي.
+                <p class="text-slate-300 leading-relaxed text-base sm:text-lg border-r-4 accent-border pr-4 bg-slate-900/50 py-3 rounded-l-xl">
+                    خبرة هندسية وميدانية تتجاوز <strong class="text-white">14 عاماً</strong> في قيادة عمليات الدعم التقني المتقدم، صيانة اللوحات الإلكترونية على مستوى المكونات الدقيقة (<span class="font-mono accent-text">Component-Level</span>)، الهندسة العكسية وبرمجة شرائح <span class="font-mono accent-text">EEPROM / SPI Flash</span>، وأتمتة نشر أنظمة التشغيل والشبكات على نطاق مؤسسي واسع، مع خلفية أكاديمية في إدارة الأعمال تضمن مواءمة الحلول التقنية مع كفاءة التشغيل المؤسسي.
                 </p>
 
-                <!-- Key Info Badges for HR -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1 text-xs text-slate-300">
-                    <div class="glass-panel p-3 rounded-xl flex items-center gap-2.5">
-                        <i class="fa-solid fa-location-dot text-emerald-400 text-base"></i>
+                    <div class="glass-panel p-3.5 rounded-2xl flex items-center gap-3 card-hover">
+                        <i class="fa-solid fa-location-dot accent-text text-lg"></i>
                         <div>
                             <span class="text-slate-400 block text-[10px]">الموقع الجغرافي</span>
                             <span class="font-bold text-white">دمشق، سوريا</span>
                         </div>
                     </div>
-                    <div class="glass-panel p-3 rounded-xl flex items-center gap-2.5">
-                        <i class="fa-solid fa-building-shield text-cyan-400 text-base"></i>
+                    <div class="glass-panel p-3.5 rounded-2xl flex items-center gap-3 card-hover">
+                        <i class="fa-solid fa-building-shield text-cyan-400 text-lg"></i>
                         <div>
                             <span class="text-slate-400 block text-[10px]">العمل الحالي</span>
                             <span class="font-bold text-white">وزارة التنمية الإدارية</span>
                         </div>
                     </div>
-                    <div class="glass-panel p-3 rounded-xl flex items-center gap-2.5 col-span-2 sm:col-span-1">
-                        <i class="fa-solid fa-graduation-cap text-purple-400 text-base"></i>
+                    <div class="glass-panel p-3.5 rounded-2xl flex items-center gap-3 col-span-2 sm:col-span-1 card-hover">
+                        <i class="fa-solid fa-graduation-cap text-purple-400 text-lg"></i>
                         <div>
                             <span class="text-slate-400 block text-[10px]">الدرجة الأكاديمية</span>
                             <span class="font-bold text-white">إدارة الأعمال — SVU</span>
@@ -187,67 +210,80 @@
                     </div>
                 </div>
 
-                <!-- Action Buttons -->
                 <div class="flex flex-wrap gap-3 pt-2 no-print">
-                    <button onclick="downloadVCard()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-3 rounded-xl transition flex items-center gap-2 shadow-lg shadow-emerald-500/20">
+                    <button onclick="downloadVCard()" class="accent-bg text-slate-950 font-black px-5 py-3.5 rounded-xl transition flex items-center gap-2 shadow-lg hover:opacity-90">
                         <i class="fa-solid fa-address-card"></i> حفظ بطاقة الاتصال (vCard)
                     </button>
-                    <a href="#projects-hub" class="bg-cyber-card hover:bg-slate-800 text-white border border-slate-700 font-semibold px-5 py-3 rounded-xl transition flex items-center gap-2">
-                        <i class="fa-solid fa-cubes text-cyan-400"></i> استعراض بوابة المشاريع
+                    <a href="#remote-support" class="glass-panel hover:bg-slate-800 text-white font-bold px-5 py-3.5 rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-laptop-medical accent-text"></i> حجز جلسة AnyDesk
                     </a>
-                    <a href="https://wa.me/963931677458?text=مرحباً%20أستاذ%20باسل،%20اطلعت%20على%20ملفك%20المهني%20وأود%20التواصل%20معك" target="_blank" class="bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/30 font-semibold px-4 py-3 rounded-xl transition flex items-center gap-2">
+                    <a href="https://wa.me/963931677458?text=مرحباً%20أستاذ%20باسل،%20اطلعت%20على%20ملفك%20المهني%20وأود%20التواصل%20معك" target="_blank" class="bg-slate-900/90 hover:bg-slate-800 accent-text border border-slate-700 font-bold px-4 py-3.5 rounded-xl transition flex items-center gap-2">
                         <i class="fa-brands fa-whatsapp text-lg"></i> واتساب مباشر
                     </a>
                 </div>
             </div>
 
-            <!-- Left Column: Quantitative Impact Metrics (HR Dashboard Card) -->
+            <!-- Quantitative Impact Metrics -->
             <div class="lg:col-span-5">
                 <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-800 relative overflow-hidden">
-                    <div class="absolute -top-20 -left-20 w-44 h-44 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div>
                             <h2 class="text-white font-bold text-lg">مؤشرات الأداء والكفاءة المهنية</h2>
                             <p class="text-xs text-slate-400">ملخص تنفيذي موثق لمدراء التوظيف والعمليات</p>
                         </div>
-                        <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 font-mono text-xs border border-emerald-500/30">VERIFIED</span>
+                        <span class="px-2.5 py-1 rounded-lg accent-badge font-mono text-xs font-bold">VERIFIED</span>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-slate-950/70 p-4 rounded-2xl border border-slate-800/80">
-                            <span class="text-3xl font-black text-emerald-400 font-mono block">+14</span>
-                            <span class="text-xs text-slate-300 font-semibold mt-1 block">عاماً من الخبرة التقنية</span>
-                            <span class="text-[11px] text-slate-500 block mt-0.5">هاردوير، فيرموير، وأنظمة</span>
+                        <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800/80 card-hover">
+                            <span class="text-3xl font-black accent-text font-mono block">+14</span>
+                            <span class="text-xs text-slate-200 font-bold mt-1 block">عاماً من الخبرة التقنية</span>
+                            <span class="text-[11px] text-slate-400 block mt-0.5">هاردوير، فيرموير، وأنظمة</span>
                         </div>
-                        <div class="bg-slate-950/70 p-4 rounded-2xl border border-slate-800/80">
+                        <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800/80 card-hover">
                             <span class="text-3xl font-black text-cyan-400 font-mono block">+150</span>
-                            <span class="text-xs text-slate-300 font-semibold mt-1 block">نشر أنظمة مؤسسي</span>
-                            <span class="text-[11px] text-slate-500 block mt-0.5">أتمتة Sysprep & Macrium</span>
+                            <span class="text-xs text-slate-200 font-bold mt-1 block">نشر أنظمة مؤسسي</span>
+                            <span class="text-[11px] text-slate-400 block mt-0.5">أتمتة Sysprep & Macrium</span>
                         </div>
-                        <div class="bg-slate-950/70 p-4 rounded-2xl border border-slate-800/80">
+                        <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800/80 card-hover">
                             <span class="text-3xl font-black text-purple-400 font-mono block">12</span>
-                            <span class="text-xs text-slate-300 font-semibold mt-1 block">عاماً كرئيس قسم صيانة</span>
-                            <span class="text-[11px] text-slate-500 block mt-0.5">إدارة فرق وصيانة بوردات</span>
+                            <span class="text-xs text-slate-200 font-bold mt-1 block">عاماً كرئيس قسم صيانة</span>
+                            <span class="text-[11px] text-slate-400 block mt-0.5">إدارة فرق وصيانة بوردات</span>
                         </div>
-                        <div class="bg-slate-950/70 p-4 rounded-2xl border border-slate-800/80">
-                            <span class="text-3xl font-black text-amber-400 font-mono block">4</span>
-                            <span class="text-xs text-slate-300 font-semibold mt-1 block">تخصصات هندسية مدمجة</span>
-                            <span class="text-[11px] text-slate-500 block mt-0.5">IT, PCB, EEPROM, C# Dev</span>
+                        <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800/80 card-hover">
+                            <span class="text-3xl font-black text-amber-400 font-mono block">99%</span>
+                            <span class="text-xs text-slate-200 font-bold mt-1 block">كفاءة التشخيص المخبري</span>
+                            <span class="text-[11px] text-slate-400 block mt-0.5">IT, PCB, EEPROM, C# Dev</span>
                         </div>
                     </div>
 
-                    <div class="mt-6 pt-5 border-t border-slate-800/80 space-y-2.5 text-xs">
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">نطاق العلامات التجارية (طابعات وحواسيب):</span>
-                            <span class="font-mono text-white font-semibold">Epson, HP, Canon, Brother, Dell, MSI</span>
+                    <div class="mt-6 pt-5 border-t border-slate-800/80 space-y-3 text-xs">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 font-semibold">صيانة اللوحات الدقيقة والـ Firmware</span>
+                                <span class="font-mono accent-text">98%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+                                <div class="accent-bg h-full rounded-full" style="width: 98%"></div>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">بيئات التشغيل والبرمجة:</span>
-                            <span class="font-mono text-emerald-400 font-semibold">Win11 Enterprise, C#/.NET, PowerShell</span>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 font-semibold">أتمتة ونشر الأنظمة المؤسسية (Sysprep / VAMT)</span>
+                                <span class="font-mono text-cyan-400">96%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-cyan-400 h-full rounded-full" style="width: 96%"></div>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">جاهزية الدعم عن بعد وحلول الطوارئ:</span>
-                            <span class="text-cyan-400 font-bold"><i class="fa-solid fa-circle-check ml-1"></i> متاح عبر AnyDesk / ميداني</span>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 font-semibold">تطوير أدوات الصيانة والأمن (C# / PowerShell)</span>
+                                <span class="font-mono text-purple-400">92%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-purple-400 h-full rounded-full" style="width: 92%"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -256,13 +292,13 @@
         </div>
     </header>
 
-    <!-- Career Timeline & Academic Qualification (HR Core Section) -->
+    <!-- Career Timeline & Academic Qualification -->
     <section id="career-timeline" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
             <div>
-                <span class="text-emerald-400 font-mono text-xs uppercase tracking-widest block mb-1">CAREER & ACADEMIC RECORD</span>
+                <span class="accent-text font-mono text-xs uppercase tracking-widest block mb-1">CAREER & ACADEMIC RECORD</span>
                 <h2 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
-                    <i class="fa-solid fa-briefcase text-emerald-400"></i> السجل المهني والتدرج الوظيفي الموثق
+                    <i class="fa-solid fa-briefcase accent-text"></i> السجل المهني والتدرج الوظيفي الموثق
                 </h2>
             </div>
             <p class="text-slate-400 text-sm max-w-md">
@@ -271,18 +307,16 @@
         </div>
 
         <div class="grid lg:grid-cols-12 gap-8">
-            <!-- Work Experience Timeline (8 Cols) -->
             <div class="lg:col-span-8 relative timeline-line pr-10 space-y-8">
                 
-                <!-- Role 1 -->
                 <div class="relative glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
-                    <span class="absolute -right-[33px] top-6 w-4 h-4 rounded-full bg-emerald-400 ring-4 ring-emerald-500/20"></span>
+                    <span class="absolute -right-[33px] top-6 w-4 h-4 rounded-full accent-bg ring-4 ring-emerald-500/20"></span>
                     <div class="flex flex-wrap justify-between items-start gap-2 mb-3">
                         <div>
                             <h3 class="text-lg sm:text-xl font-bold text-white">أخصائي دعم فني أول (Senior IT Support Specialist)</h3>
-                            <p class="text-emerald-400 font-semibold text-sm">وزارة التنمية الإدارية — مكتب الدعم التقني (دمشق)</p>
+                            <p class="accent-text font-semibold text-sm">وزارة التنمية الإدارية — مكتب الدعم التقني (دمشق)</p>
                         </div>
-                        <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs">
+                        <span class="px-3 py-1 rounded-full accent-badge font-mono text-xs">
                             نيسان 2025 — حتى الآن
                         </span>
                     </div>
@@ -293,7 +327,6 @@
                     </ul>
                 </div>
 
-                <!-- Role 2 -->
                 <div class="relative glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
                     <span class="absolute -right-[33px] top-6 w-4 h-4 rounded-full bg-cyan-400 ring-4 ring-cyan-500/20"></span>
                     <div class="flex flex-wrap justify-between items-start gap-2 mb-3">
@@ -312,7 +345,6 @@
                     </ul>
                 </div>
 
-                <!-- Role 3 -->
                 <div class="relative glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
                     <span class="absolute -right-[33px] top-6 w-4 h-4 rounded-full bg-purple-400 ring-4 ring-purple-500/20"></span>
                     <div class="flex flex-wrap justify-between items-start gap-2 mb-3">
@@ -333,15 +365,14 @@
 
             </div>
 
-            <!-- Academic & Security Credentials Column (4 Cols) -->
             <div class="lg:col-span-4 space-y-6">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
                     <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
                         <i class="fa-solid fa-user-graduate text-cyan-400"></i> التأهيل الأكاديمي والإداري
                     </h3>
                     <div class="space-y-4">
                         <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800">
-                            <span class="text-xs font-mono text-emerald-400 block">الجامعة الافتراضية السورية (SVU)</span>
+                            <span class="text-xs font-mono accent-text block">الجامعة الافتراضية السورية (SVU)</span>
                             <h4 class="font-bold text-white text-base mt-1">إدارة الأعمال (Business Administration)</h4>
                             <p class="text-slate-400 text-xs mt-1 leading-relaxed">
                                 دمج الخبرة الهندسية المعمقة مع منهجيات الإدارة الحديثة، التخطيط الاستراتيجي، وإدارة الموارد وتقانة المعلومات.
@@ -357,10 +388,9 @@
                     </div>
                 </div>
 
-                <!-- Hardware & Lab Equipment Box -->
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
                     <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-screwdriver-wrench text-emerald-400"></i> تجهيزات المختبر والأدوات المعتمدة
+                        <i class="fa-solid fa-screwdriver-wrench accent-text"></i> تجهيزات المختبر والأدوات المعتمدة
                     </h3>
                     <div class="flex flex-wrap gap-2 text-xs font-mono">
                         <span class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200">CH341A & RT809F</span>
@@ -378,7 +408,7 @@
         </div>
     </section>
 
-    <!-- Engineering Skills Matrix (Filterable for Technical Recruiters) -->
+    <!-- Engineering Skills Matrix -->
     <section id="skills-matrix" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto">
         <div class="mb-10">
             <span class="text-cyan-400 font-mono text-xs uppercase tracking-widest block mb-1">COMPETENCY MATRIX</span>
@@ -388,24 +418,22 @@
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Domain 1 -->
             <div class="glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
-                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl mb-4">
+                <div class="w-12 h-12 rounded-xl accent-badge flex items-center justify-center text-2xl mb-4">
                     <i class="fa-solid fa-memory"></i>
                 </div>
                 <h3 class="text-lg font-bold text-white mb-3">هندسة الفيرموير والـ EEPROM</h3>
                 <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
-                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> سحب وتعديل الدامبات (SPI Flash / EEPROM)</li>
-                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> التحليل الست عشري (Hex Patching) وفك التشفير</li>
-                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> تحويل الطابعات إلى أنظمة Chipless دائمة</li>
-                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> معالجة أخطاء الإقلاع (Boot-loop Recovery)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check accent-text"></i> سحب وتعديل الدامبات (SPI Flash / EEPROM)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check accent-text"></i> التحليل الست عشري (Hex Patching) وفك التشفير</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check accent-text"></i> تحويل الطابعات إلى أنظمة Chipless دائمة</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check accent-text"></i> معالجة أخطاء الإقلاع (Boot-loop Recovery)</li>
                 </ul>
             </div>
 
-            <!-- Domain 2 -->
             <div class="glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
                 <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl mb-4">
-                    <i class="fa-solid fa-Wave-square"></i>
+                    <i class="fa-solid fa-wave-square"></i>
                 </div>
                 <h3 class="text-lg font-bold text-white mb-3">صيانة البوردات الدقيقة (PCB)</h3>
                 <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
@@ -416,7 +444,6 @@
                 </ul>
             </div>
 
-            <!-- Domain 3 -->
             <div class="glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
                 <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-4">
                     <i class="fa-solid fa-server"></i>
@@ -430,7 +457,6 @@
                 </ul>
             </div>
 
-            <!-- Domain 4 -->
             <div class="glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
                 <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl mb-4">
                     <i class="fa-solid fa-shield-halved"></i>
@@ -446,32 +472,30 @@
         </div>
     </section>
 
-    <!-- CENTRAL ECOSYSTEM HUB (Future Projects Launchpad) -->
+    <!-- CENTRAL ECOSYSTEM HUB -->
     <section id="projects-hub" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto">
-        <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-emerald-500/30">
+        <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-slate-800">
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8 pb-6 border-b border-slate-800">
                 <div>
-                    <div class="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 mb-2">
-                        <i class="fa-solid fa-sitemap"></i> CENTRAL SUB-SYSTEMS & PROJECTS LAUNCHPAD
+                    <div class="inline-flex items-center gap-2 text-xs font-mono accent-text mb-2">
+                        <i class="fa-solid fa-sitemap"></i> CENTRAL SUB-SYSTEMS & PROJECTS SHOWCASE
                     </div>
                     <h2 class="text-2xl sm:text-4xl font-black text-white">
-                        بوابة الأنظمة والمشاريع التقنية الفرعية
+                        بوابة الأنظمة والمشاريع التقنية المطورة
                     </h2>
                     <p class="text-slate-400 text-sm mt-2 max-w-2xl">
-                        المركز الرئيسي لكافة البرمجيات، قواعد البيانات الهندسية، والمبادرات التقنية. كل بطاقة أدناه تمثل مشروعاً متكاملاً يمكن استعراض مواصفاته المعمارية أو الانتقال إلى صفحته المستقلة.
+                        المركز الرئيسي لكافة البرمجيات، قواعد البيانات الهندسية، والمبادرات التقنية. اضغط على أي مشروع لاستعراض معماريته الهندسية الكاملة فوراً.
                     </p>
                 </div>
 
-                <!-- Category Filter Buttons -->
                 <div class="flex flex-wrap gap-2 no-print" id="hub-filters">
-                    <button onclick="filterHub('all')" class="hub-filter-btn active bg-emerald-500 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition">الكل</button>
-                    <button onclick="filterHub('software')" class="hub-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl text-xs transition">البرمجيات والأدوات</button>
-                    <button onclick="filterHub('firmware')" class="hub-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl text-xs transition">الفيرموير والعتاد</button>
-                    <button onclick="filterHub('enterprise')" class="hub-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl text-xs transition">الأنظمة والأمن</button>
+                    <button onclick="filterHub('all', this)" class="hub-filter-btn accent-bg text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition">الكل</button>
+                    <button onclick="filterHub('software', this)" class="hub-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl text-xs transition">البرمجيات والأدوات</button>
+                    <button onclick="filterHub('firmware', this)" class="hub-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl text-xs transition">الفيرموير والعتاد</button>
+                    <button onclick="filterHub('enterprise', this)" class="hub-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl text-xs transition">الأنظمة والأمن</button>
                 </div>
             </div>
 
-            <!-- Dynamic Projects Grid (Rendered via JS for effortless scalability) -->
             <div id="ecosystem-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
     </section>
@@ -480,24 +504,24 @@
     <section id="terminal-lab" class="py-12 px-4 sm:px-6 max-w-7xl mx-auto no-print">
         <div class="grid lg:grid-cols-12 gap-8 items-center">
             <div class="lg:col-span-4 space-y-4">
-                <span class="text-emerald-400 font-mono text-xs uppercase tracking-widest block">INTERACTIVE CONSOLE</span>
+                <span class="accent-text font-mono text-xs uppercase tracking-widest block">INTERACTIVE CONSOLE</span>
                 <h2 class="text-2xl sm:text-3xl font-black text-white">
                     طرفية الفحص والاستعلام التفاعلي
                 </h2>
                 <p class="text-slate-400 text-sm leading-relaxed">
-                    اضغط على أي أمر تشخيصي أدناه لتشغيل محاكاة حية في الطرفية تستعرض خلاصة الملف المهني، حالة مشاريع الفيرموير، أو شجرة البنية التحتية للموقع.
+                    اضغط على أي أمر تشخيصي أدناه لتشغيل محاكاة حية في الطرفية تستعرض خلاصة الملف المهني، حالة مشاريع الفيرموير، أو جاهزية العتاد المخبري.
                 </p>
                 <div class="flex flex-col gap-2.5 pt-2">
-                    <button onclick="runTerminalCmd('hr')" class="text-right bg-cyber-card hover:bg-slate-800 border border-slate-700 p-3 rounded-xl text-xs font-mono text-emerald-400 transition flex items-center justify-between">
+                    <button onclick="runTerminalCmd('hr')" class="text-right glass-panel hover:bg-slate-800 border border-slate-700 p-3.5 rounded-xl text-xs font-mono accent-text transition flex items-center justify-between">
                         <span>./query_profile --target="HR_Executive"</span>
                         <i class="fa-solid fa-play"></i>
                     </button>
-                    <button onclick="runTerminalCmd('eeprom')" class="text-right bg-cyber-card hover:bg-slate-800 border border-slate-700 p-3 rounded-xl text-xs font-mono text-cyan-400 transition flex items-center justify-between">
+                    <button onclick="runTerminalCmd('eeprom')" class="text-right glass-panel hover:bg-slate-800 border border-slate-700 p-3.5 rounded-xl text-xs font-mono text-cyan-400 transition flex items-center justify-between">
                         <span>./chipless_bs --verify-security</span>
                         <i class="fa-solid fa-play"></i>
                     </button>
-                    <button onclick="runTerminalCmd('tree')" class="text-right bg-cyber-card hover:bg-slate-800 border border-slate-700 p-3 rounded-xl text-xs font-mono text-purple-400 transition flex items-center justify-between">
-                        <span>./hub_router --list-subpages</span>
+                    <button onclick="runTerminalCmd('tree')" class="text-right glass-panel hover:bg-slate-800 border border-slate-700 p-3.5 rounded-xl text-xs font-mono text-purple-400 transition flex items-center justify-between">
+                        <span>./lab_diagnostics --check-tools</span>
                         <i class="fa-solid fa-play"></i>
                     </button>
                 </div>
@@ -513,76 +537,123 @@
                         </div>
                         <span class="text-slate-400 text-xs">bassel@bstech-hub:~ (PowerShell / Bash Core)</span>
                     </div>
-                    <div id="terminal-output" class="p-6 space-y-2 text-slate-300 min-h-[260px] max-h-[320px] overflow-y-auto leading-relaxed">
-                        <p><span class="text-emerald-400">bassel@bstech-hub:~$</span> ./system_status --all</p>
-                        <p class="text-slate-400">[INFO] Initializing BS.Tech Central Ecosystem Hub...</p>
-                        <p class="text-emerald-400">[OK] Engineer: Bassel Mohammed Al-Ahmad (Senior IT Support Specialist)</p>
-                        <p class="text-cyan-400">[OK] Sub-Pages Router: Active & Ready for expansion</p>
-                        <p class="text-amber-400">[TIP] Click any command button on the right to execute live queries.</p>
+                    <div id="terminal-output" class="p-6 space-y-2 text-slate-300 min-h-[250px] max-h-[320px] overflow-y-auto leading-relaxed">
+                        <p><span class="accent-text">bassel@bstech-hub:~$</span> ./system_status --all</p>
+                        <p class="text-slate-400">[INFO] Initializing BS.Tech Central Ecosystem Hub v3.0...</p>
+                        <p class="accent-text">[OK] Engineer: Bassel Mohammed Al-Ahmad (Senior IT Support Specialist)</p>
+                        <p class="text-cyan-400">[OK] Single-Page Interactive Architecture: Active & Verified</p>
+                        <p class="text-amber-400">[TIP] Click any command button to execute live diagnostic queries.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact & Remote Support Gateway -->
-    <section id="contact-gateway" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto">
-        <div class="bg-gradient-to-r from-emerald-950/70 via-cyber-card to-cyber-card rounded-3xl p-8 sm:p-12 border border-emerald-500/40">
-            <div class="grid lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-7 space-y-4">
-                    <span class="text-emerald-400 font-mono text-xs uppercase tracking-widest">DIRECT COMMUNICATION & REMOTE LAB</span>
-                    <h2 class="text-2xl sm:text-4xl font-black text-white">
-                        التواصل المهني وبوابة الدعم الفني عن بعد
+    <!-- Integrated Smart Remote Support Form (AnyDesk + Cost Estimator) -->
+    <section id="remote-support" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto no-print">
+        <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-slate-800">
+            <div class="grid lg:grid-cols-12 gap-10 items-center">
+                
+                <div class="lg:col-span-5 space-y-5">
+                    <span class="accent-text font-mono text-xs uppercase tracking-widest block">
+                        <i class="fa-solid fa-satellite-dish ml-1"></i> BS.TECH REMOTE LAB
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-white leading-tight">
+                        حجز جلسة دعم فوري عبر <span class="accent-text">AnyDesk</span>
                     </h2>
-                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                        سواء كنت مسؤول توظيف تبحث عن كفاءة هندسية قيادية، أو عميلاً بحاجة إلى دعم تقني فوري عبر <strong class="text-white">AnyDesk</strong> أو صيانة متقدمة للعتاد والطابعات في دمشق، يمكنك التواصل مباشرة عبر القنوات الرسمية أدناه.
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        أرسل تفاصيل العطل ورقم اتصال AnyDesk مباشرة إلى واتساب بنقرة واحدة، أو تواصل مهنياً لفرص العمل والاستشارات الهندسية.
                     </p>
-                    <div class="flex flex-wrap gap-6 pt-2 text-sm text-slate-200 font-mono">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-phone-volume text-emerald-400"></i>
-                            <span dir="ltr">0931 677 458</span>
+
+                    <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-3 text-xs text-slate-300">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                            <span class="text-slate-400">رقم التواصل المباشر:</span>
+                            <span class="font-mono font-bold text-white" dir="ltr">+963 931 677 458</span>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-map-pin text-cyan-400"></i>
-                            <span>دمشق، سوريا</span>
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                            <span class="text-slate-400">نطاق الخدمة:</span>
+                            <span class="font-bold accent-text">عن بعد (عالمي) / ميداني (دمشق)</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-400">برنامج الاتصال المعتمد:</span>
+                            <a href="https://anydesk.com/en/downloads/windows" target="_blank" class="text-cyan-400 hover:underline font-bold flex items-center gap-1">
+                                تحميل AnyDesk <i class="fa-solid fa-download"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3 no-print">
-                    <a href="https://wa.me/963931677458?text=مرحباً%20أستاذ%20باسل،%20أتواصل%20معك%20عبر%20موقعك%20الرسمي%20BS.Tech" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 px-6 rounded-xl text-center transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
-                        <i class="fa-brands fa-whatsapp text-xl"></i> مراسلة فورية عبر واتساب
-                    </a>
-                    <button onclick="downloadVCard()" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3.5 px-6 rounded-xl text-center border border-slate-700 transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-download text-cyan-400"></i> تنزيل بطاقة الأعمال الرقمية (vCard)
-                    </button>
-                    <a href="https://anydesk.com/en/downloads/windows" target="_blank" class="bg-slate-950 hover:bg-slate-900 text-slate-300 font-semibold py-3 px-6 rounded-xl text-center border border-slate-800 transition flex items-center justify-center gap-2 text-xs">
-                        <i class="fa-solid fa-desktop text-rose-500"></i> تحميل برنامج AnyDesk لجلسات الدعم عن بعد
-                    </a>
+                <div class="lg:col-span-7">
+                    <form onsubmit="sendToWhatsApp(event)" class="bg-slate-950/90 p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 mb-2">الاسم / الجهة <span class="text-rose-500">*</span></label>
+                                <input type="text" id="clientName" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500" placeholder="مثال: شركة الأفق / اسمك الكريم">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 mb-2 flex justify-between">
+                                    <span>رقم AnyDesk <span class="text-rose-500">*</span></span>
+                                    <span class="font-mono text-[10px] accent-text">9-10 Digits</span>
+                                </label>
+                                <input type="number" id="anydeskId" required min="100000000" max="9999999999" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white font-mono text-center tracking-widest focus:outline-none focus:border-emerald-500" placeholder="123 456 789">
+                            </div>
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 mb-2">نوع الجهاز</label>
+                                <select id="deviceType" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+                                    <option value="لابتوب (Laptop)">لابتوب (Laptop)</option>
+                                    <option value="حاسوب مكتبي (Desktop)">حاسوب مكتبي (Desktop)</option>
+                                    <option value="طابعة (Epson / Canon / HP / Brother)">طابعة (Epson / Canon / HP / Brother)</option>
+                                    <option value="جهاز بصمة / شبكة">جهاز بصمة / شبكة</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 mb-2">تصنيف الخدمة المطلوبة</label>
+                                <select id="issueCategory" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+                                    <option value="تصفير وتعديل فيرموير طابعة (Chipless)">تصفير وتعديل فيرموير طابعة (Chipless)</option>
+                                    <option value="إصلاح أعطال نظام Windows والبرمجيات">إصلاح أعطال نظام Windows والبرمجيات</option>
+                                    <option value="تعريفات وربط شبكي وطابعات">تعريفات وربط شبكي وطابعات</option>
+                                    <option value="حجز موعد صيانة هاردوير / بوردات">حجز موعد صيانة هاردوير / بوردات</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-2">وصف مختصر للمشكلة (اختياري)</label>
+                            <textarea id="issueDetails" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500" placeholder="مثال: موديل الطابعة أو رمز الخطأ الظاهر على الشاشة..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full accent-bg text-slate-950 font-black text-sm py-4 rounded-xl transition flex items-center justify-center gap-2 shadow-lg hover:opacity-90">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> إرسال بطاقة التشخيص وبدء الجلسة عبر واتساب
+                        </button>
+                    </form>
                 </div>
+
             </div>
         </div>
     </section>
 
     <!-- Project Architecture Modal -->
     <div id="project-modal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 no-print">
-        <div class="glass-panel max-w-2xl w-full rounded-3xl border border-emerald-500/40 p-6 sm:p-8 space-y-5 relative">
+        <div class="glass-panel max-w-2xl w-full rounded-3xl border border-slate-700 p-6 sm:p-8 space-y-5 relative">
             <button onclick="closeProjectModal()" class="absolute top-5 left-5 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="flex items-center gap-3">
-                <span id="modal-badge" class="text-xs font-mono px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30"></span>
+                <span id="modal-badge" class="text-xs font-mono px-3 py-1 rounded-full accent-badge"></span>
                 <span id="modal-status" class="text-xs font-mono text-slate-400"></span>
             </div>
             <h3 id="modal-title" class="text-2xl font-black text-white"></h3>
             <p id="modal-desc" class="text-slate-300 text-sm leading-relaxed"></p>
             <div class="bg-slate-950/90 p-4 rounded-2xl border border-slate-800">
-                <span class="text-xs font-mono text-cyan-400 block mb-2">المواصفات الهندسية والمعمارية:</span>
+                <span class="text-xs font-mono text-cyan-400 block mb-2">المواصفات الهندسية والمعمارية المطبقة:</span>
                 <ul id="modal-specs" class="space-y-1.5 text-xs text-slate-300 list-disc list-inside"></ul>
             </div>
             <div class="flex flex-wrap gap-3 pt-2">
-                <a id="modal-link" href="#" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-2.5 rounded-xl text-sm transition flex items-center gap-2">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i> فتح صفحة المشروع المستقلة
+                <a href="#remote-support" onclick="closeProjectModal()" class="accent-bg text-slate-950 font-bold px-5 py-2.5 rounded-xl text-sm transition flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp"></i> طلب الخدمة أو الاستفسار عن المشروع
                 </a>
                 <button onclick="closeProjectModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-5 py-2.5 rounded-xl text-sm transition">
                     إغلاق المعاينة
@@ -595,8 +666,8 @@
     <div id="cmd-palette" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-start justify-center pt-24 p-4 no-print">
         <div class="glass-panel max-w-xl w-full rounded-2xl border border-slate-700 overflow-hidden shadow-2xl">
             <div class="p-4 border-b border-slate-800 flex items-center gap-3">
-                <i class="fa-solid fa-magnifying-glass text-emerald-400"></i>
-                <input id="cmd-input" type="text" oninput="filterCommands(this.value)" placeholder="ابحث عن مشروع، مهارة، أو أمر تنفيذي..." class="w-full bg-transparent text-white text-sm focus:outline-none">
+                <i class="fa-solid fa-magnifying-glass accent-text"></i>
+                <input id="cmd-input" type="text" oninput="filterCommands(this.value)" placeholder="ابحث عن مشروع، مهارة، أو تغيير السمة..." class="w-full bg-transparent text-white text-sm focus:outline-none">
                 <button onclick="toggleCommandPalette()" class="text-xs font-mono text-slate-400 bg-slate-900 px-2 py-1 rounded">ESC</button>
             </div>
             <div id="cmd-list" class="p-2 max-h-72 overflow-y-auto space-y-1 text-sm"></div>
@@ -611,11 +682,15 @@
         </div>
     </footer>
 
-    <!-- Core Ecosystem & Interactive JavaScript Engine -->
     <script>
-        /* ============================================================================
-           مصفوفة المشاريع والأنظمة الفرعية (قابلة للتوسع مستقبلاً بإضافة سطر واحد فقط)
-           ============================================================================ */
+        // Static Color Map to prevent Tailwind JIT purge bugs
+        const colorStyles = {
+            emerald: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+            cyan: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30',
+            purple: 'bg-purple-500/10 text-purple-400 border-purple-500/30',
+            amber: 'bg-amber-500/10 text-amber-400 border-amber-500/30'
+        };
+
         const ecosystemProjects = [
             {
                 id: 'chipless-bs',
@@ -623,7 +698,6 @@
                 category: 'software',
                 badge: 'C# .NET / AES-256',
                 status: 'Production v2.1',
-                path: './projects/chipless-bs/index.html',
                 icon: 'fa-microchip',
                 color: 'emerald',
                 summary: 'منظومة برمجية لتفليش وتعديل فيرموير الطابعات بدون شرائح، محمية بنظام ربط العتاد HWID وتشفير AES-256 GCM مع تحقق سحابي عبر KeyAuth API.',
@@ -640,7 +714,6 @@
                 category: 'firmware',
                 badge: 'Hardware & EEPROM Docs',
                 status: 'Active Knowledge Base',
-                path: './projects/black-box/index.html',
                 icon: 'fa-box-archive',
                 color: 'cyan',
                 summary: 'المرجع التقني الشامل لإجراءات التشخيص الدقيق، خرائط الفولتيات، أوضاع الصيانة (Service Mode)، ومسارات تعديل الـ EEPROM لكبرى العلامات التجارية.',
@@ -657,7 +730,6 @@
                 category: 'enterprise',
                 badge: 'Sysprep / VHDX / VAMT',
                 status: 'Enterprise Verified',
-                path: './projects/fleet-deploy/index.html',
                 icon: 'fa-server',
                 color: 'purple',
                 summary: 'معمارية متكاملة لأتمتة نشر وتعميم أنظمة Windows 11 Pro وتفعيلها مركزياً على مئات الحواسيب المحمولة والمكتبية بوقت قياسي.',
@@ -673,8 +745,7 @@
                 title: 'منصة الوعي الأمني والهندسة الاجتماعية',
                 category: 'enterprise',
                 badge: 'Cybersecurity Lab',
-                status: 'Live Sub-Portal',
-                path: './projects/security-awareness/index.html',
+                status: 'Live Initiative',
                 icon: 'fa-user-shield',
                 color: 'amber',
                 summary: 'مبادرة تقنية تفاعلية لتعليم واختبار الوعي الأمني ضد هجمات الاصطياد (Phishing) والهندسة الاجتماعية وحماية بيانات المؤسسات.',
@@ -690,7 +761,6 @@
                 category: 'software',
                 badge: 'Ollama / Llama 3 / RAG',
                 status: 'R&D Lab',
-                path: './projects/local-ai/index.html',
                 icon: 'fa-brain',
                 color: 'emerald',
                 summary: 'معمارية وكيل ذكي يعمل محلياً بالكامل (Local-First) دون إنترنت لتحليل أكواد C# واسترجاع حلول أعطال الهاردوير من قاعدة البيانات الخاصة.',
@@ -706,57 +776,51 @@
                 category: 'software',
                 badge: 'AnyDesk / Client Portal',
                 status: 'Commercial Service',
-                path: './projects/remote-support/index.html',
                 icon: 'fa-headset',
                 color: 'cyan',
                 summary: 'واجهة خدمة العملاء المخصصة لحجز جلسات الصيانة البرمجية عن بعد عبر AnyDesk وتنسيق مواعيد الصيانة الميدانية للهاردوير.',
                 specs: [
                     'نظام توجيه مباشر لطلبات الصيانة إلى واتساب مع توصيف العطل المبدئي',
-                    'إرشادات سريعة للعميل لتجهيز اتصال AnyDesk وتفويض الصلاحيات بأمان',
+                    'تحقق تلقائي من صحة رقم AnyDesk قبل الإرسال',
                     'قائمة خدمات واضحة تشمل تصفير الطابعات، إصلاح الأنظمة، وحل مشاكل الشبكات'
                 ]
             }
         ];
 
-        // Render Projects Grid
         function renderHub(filter = 'all') {
             const grid = document.getElementById('ecosystem-grid');
             const filtered = filter === 'all' ? ecosystemProjects : ecosystemProjects.filter(p => p.category === filter);
             
             grid.innerHTML = filtered.map(p => `
-                <div class="bg-slate-950/80 rounded-2xl p-6 border border-slate-800 card-hover flex flex-col justify-between">
+                <div onclick="openProjectModal('${p.id}')" class="cursor-pointer bg-slate-950/85 rounded-2xl p-6 border border-slate-800 card-hover flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-4">
-                            <span class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-${p.color}-500/10 text-${p.color}-400 border border-${p.color}-500/30">
+                            <span class="text-[11px] font-mono px-2.5 py-1 rounded-full border ${colorStyles[p.color]}">
                                 ${p.badge}
                             </span>
-                            <i class="fa-solid ${p.icon} text-slate-500 text-lg"></i>
+                            <i class="fa-solid ${p.icon} text-slate-400 text-lg"></i>
                         </div>
                         <h3 class="text-lg font-bold text-white mb-2">${p.title}</h3>
                         <p class="text-slate-400 text-xs leading-relaxed mb-5">${p.summary}</p>
                     </div>
                     <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between gap-2">
-                        <button onclick="openProjectModal('${p.id}')" class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-info"></i> المعاينة المعمارية
-                        </button>
-                        <a href="${p.path}" class="text-xs font-mono bg-slate-900 hover:bg-slate-800 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition flex items-center gap-1.5">
-                            <span>فتح البوابة</span>
-                            <i class="fa-solid fa-arrow-left text-[10px]"></i>
-                        </a>
+                        <span class="text-xs font-semibold accent-text flex items-center gap-1.5">
+                            <i class="fa-solid fa-layer-group"></i> استعراض المعمارية والمواصفات
+                        </span>
+                        <i class="fa-solid fa-expand text-xs text-slate-500"></i>
                     </div>
                 </div>
             `).join('');
         }
 
-        function filterHub(category) {
+        function filterHub(category, btnEl) {
             document.querySelectorAll('.hub-filter-btn').forEach(btn => {
                 btn.className = 'hub-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl text-xs transition';
             });
-            event.target.className = 'hub-filter-btn active bg-emerald-500 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition';
+            btnEl.className = 'hub-filter-btn accent-bg text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition';
             renderHub(category);
         }
 
-        // Modal Handlers
         function openProjectModal(id) {
             const p = ecosystemProjects.find(item => item.id === id);
             if (!p) return;
@@ -765,7 +829,6 @@
             document.getElementById('modal-title').textContent = p.title;
             document.getElementById('modal-desc').textContent = p.summary;
             document.getElementById('modal-specs').innerHTML = p.specs.map(s => `<li>${s}</li>`).join('');
-            document.getElementById('modal-link').href = p.path;
             document.getElementById('project-modal').classList.remove('hidden');
         }
 
@@ -773,45 +836,59 @@
             document.getElementById('project-modal').classList.add('hidden');
         }
 
-        // Interactive Terminal Simulator
+        function setTheme(themeName) {
+            if (themeName === 'cyber') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', themeName);
+            }
+            localStorage.setItem('bstech-theme', themeName);
+        }
+
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+            const name = document.getElementById('clientName').value.trim();
+            const device = document.getElementById('deviceType').value;
+            const category = document.getElementById('issueCategory').value;
+            const anydesk = document.getElementById('anydeskId').value.trim();
+            const details = document.getElementById('issueDetails').value.trim() || 'لم يحدد';
+            const formattedAnydesk = anydesk.match(/.{1,3}/g)?.join(' ') || anydesk;
+
+            const message = `*طلب دعم فني عن بعد (BS.Tech)*\n\n*الاسم/الجهة:* ${name}\n*نوع الجهاز:* ${device}\n*الخدمة المطلوبة:* ${category}\n*رقم AnyDesk:* ${formattedAnydesk}\n\n*التفاصيل:* ${details}`;
+            window.open(`https://wa.me/963931677458?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
         function runTerminalCmd(type) {
             const out = document.getElementById('terminal-output');
-            let html = '';
             if (type === 'hr') {
-                html = `
-                    <p><span class="text-emerald-400">bassel@bstech-hub:~$</span> ./query_profile --target="HR_Executive"</p>
+                out.innerHTML = `
+                    <p><span class="accent-text">bassel@bstech-hub:~$</span> ./query_profile --target="HR_Executive"</p>
                     <p class="text-cyan-400">------------------------------------------------------------</p>
-                    <p class="text-white font-bold">CANDIDATE: Bassel Mohammed Al-Ahmad (Born: 1994, Damascus)</p>
-                    <p class="text-emerald-400">CURRENT ROLE: Technical Support Specialist @ Ministry of Administrative Development</p>
+                    <p class="text-white font-bold">CANDIDATE: Bassel Mohammed Al-Ahmad (Damascus, Syria)</p>
+                    <p class="accent-text">CURRENT ROLE: Senior IT Support @ Ministry of Administrative Development</p>
                     <p class="text-slate-300">PRIOR LEADERSHIP: 12 Years Head of Maintenance Dept @ Top Print</p>
-                    <p class="text-purple-400">EDUCATION: Business Administration — Syrian Virtual University (SVU)</p>
-                    <p class="text-amber-400">CORE VALUE: Bridges deep PCB/Firmware engineering with enterprise IT governance.</p>
+                    <p class="text-purple-400">ACADEMIC: Business Administration — Syrian Virtual University (SVU)</p>
                     <p class="text-cyan-400">------------------------------------------------------------</p>
                 `;
             } else if (type === 'eeprom') {
-                html = `
-                    <p><span class="text-emerald-400">bassel@bstech-hub:~$</span> ./chipless_bs --verify-security</p>
+                out.innerHTML = `
+                    <p><span class="accent-text">bassel@bstech-hub:~$</span> ./chipless_bs --verify-security</p>
                     <p class="text-slate-400">[INIT] Loading ChiplessBS .NET Core Module...</p>
-                    <p class="text-emerald-400">[AUTH] KeyAuth API Handshake: VERIFIED (HWID Bound)</p>
+                    <p class="accent-text">[AUTH] KeyAuth API Handshake: VERIFIED (HWID Bound)</p>
                     <p class="text-cyan-400">[CRYPTO] Payload Decryption: AES-256-GCM Integrity OK</p>
                     <p class="text-amber-400">[HARDWARE] Programmer Bus: CH341A / RT809F Ready for SPI Flash</p>
                 `;
             } else if (type === 'tree') {
-                html = `
-                    <p><span class="text-emerald-400">bassel@bstech-hub:~$</span> ./hub_router --list-subpages</p>
-                    <p class="text-slate-300">├── /index.html (Main Executive CV & Portal)</p>
-                    <p class="text-emerald-400">├── /projects/chipless-bs/index.html</p>
-                    <p class="text-cyan-400">├── /projects/black-box/index.html</p>
-                    <p class="text-purple-400">├── /projects/fleet-deploy/index.html</p>
-                    <p class="text-amber-400">├── /projects/security-awareness/index.html</p>
-                    <p class="text-emerald-400">└── /projects/remote-support/index.html</p>
+                out.innerHTML = `
+                    <p><span class="accent-text">bassel@bstech-hub:~$</span> ./lab_diagnostics --check-tools</p>
+                    <p class="accent-text">[OK] Multimeter: Pro'sKit MT-1820 Calibrated</p>
+                    <p class="text-cyan-400">[OK] Programmers: CH341A & RT809F Online</p>
+                    <p class="text-purple-400">[OK] Portable OS: Windows 11 Pro 26H2 Type-C Ready</p>
+                    <p class="text-amber-400">[OK] Remote Support Engine: AnyDesk Gateway Active</p>
                 `;
             }
-            out.innerHTML = html;
-            out.scrollTop = out.scrollHeight;
         }
 
-        // Dynamic vCard (.vcf) Generator for HR & Clients
         function downloadVCard() {
             const vcard = [
                 'BEGIN:VCARD',
@@ -822,7 +899,7 @@
                 'TITLE:Senior IT Support Specialist & Firmware Engineer',
                 'TEL;TYPE=CELL,VOICE:+963931677458',
                 'ADR;TYPE=WORK:;;دمشق;دمشق;;سوريا;',
-                'NOTE:خبرة +14 عاماً في الدعم التقني المتقدم، صيانة البوردات الدقيقة، برمجة الفيرموير وإدارة الأنظمة المؤسسية.',
+                'URL:https://basselalahmad.github.io/',
                 'END:VCARD'
             ].join('\n');
 
@@ -830,22 +907,20 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'Bassel_Alahmad_CV_Contact.vcf';
+            a.download = 'Bassel_Alahmad_Contact.vcf';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
 
-        // Command Palette Logic
         const quickCommands = [
+            { label: 'تفعيل السمة الزرقاء المؤسسية (Royal Blue)', icon: 'fa-palette', action: () => setTheme('royal') },
+            { label: 'تفعيل السمة الذهبية التنفيذية (Executive Gold)', icon: 'fa-crown', action: () => setTheme('gold') },
+            { label: 'تفعيل السمة الخضراء السيبرانية (Cyber Emerald)', icon: 'fa-microchip', action: () => setTheme('cyber') },
             { label: 'طباعة السيرة الذاتية أو حفظها كملف PDF (خاص بالـ HR)', icon: 'fa-file-pdf', action: () => window.print() },
             { label: 'تنزيل بطاقة الاتصال الرقمية (vCard)', icon: 'fa-address-card', action: () => downloadVCard() },
-            { label: 'الانتقال إلى السجل المهني والتدرج الوظيفي', icon: 'fa-briefcase', action: () => location.href = '#career-timeline' },
-            { label: 'استعراض بوابة المشاريع والأنظمة الفرعية', icon: 'fa-sitemap', action: () => location.href = '#projects-hub' },
-            { label: 'معاينة معمارية: منصة ChiplessBS', icon: 'fa-microchip', action: () => openProjectModal('chipless-bs') },
-            { label: 'معاينة معمارية: موسوعة الصندوق الأسود', icon: 'fa-box-archive', action: () => openProjectModal('black-box') },
-            { label: 'التواصل المباشر عبر واتساب', icon: 'fa-brands fa-whatsapp', action: () => window.open('https://wa.me/963931677458', '_blank') }
+            { label: 'حجز جلسة دعم فني عبر AnyDesk', icon: 'fa-headset', action: () => location.href = '#remote-support' }
         ];
 
         function toggleCommandPalette() {
@@ -864,7 +939,7 @@
             list.innerHTML = matches.map((c, idx) => `
                 <button onclick="executeCommand(${idx})" class="w-full text-right px-4 py-3 rounded-xl hover:bg-slate-800/90 text-slate-200 flex items-center justify-between transition">
                     <span class="flex items-center gap-3">
-                        <i class="fa-solid ${c.icon} text-emerald-400"></i>
+                        <i class="fa-solid ${c.icon} accent-text"></i>
                         <span>${c.label}</span>
                     </span>
                     <i class="fa-solid fa-arrow-left text-xs text-slate-500"></i>
@@ -887,8 +962,11 @@
             }
         });
 
-        // Initialize Hub on Load
-        document.addEventListener('DOMContentLoaded', () => renderHub('all'));
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('bstech-theme');
+            if (savedTheme) setTheme(savedTheme);
+            renderHub('all');
+        });
     </script>
 </body>
 </html>
