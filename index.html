@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="الموقع الرسمي والملف المهني للمهندس باسل محمد الأحمد - أخصائي دعم فني أول ومهندس صيانة بوردات وفيرموير وإدارة أنظمة مؤسسية">
+    <title>باسل محمد الأحمد | Senior IT Support & Systems Engineering Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            bg: '#060a12',
+                            surface: '#0d1424',
+                            card: '#111b2e',
+                            border: '#1e293b',
+                            emerald: '#10b981',
+                            cyan: '#06b6d4',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #060a12;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        .pcb-pattern {
+            background-image: 
+                radial-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px),
+                linear-gradient(to right, rgba(30, 41, 59, 0.2) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 41, 59, 0.2) 1px, transparent 1px);
+            background-size: 24px 24px, 96px 96px, 96px 96px;
+        }
+        .glass-panel {
+            background: rgba(17, 27, 46, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .card-hover {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            border-color: #10b981;
+            box-shadow: 0 12px 30px -10px rgba(16, 185, 129, 0.25);
+        }
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 15px;
+            width: 2px;
+            background: linear-gradient(to bottom, #10b981, #06b6d4, #1e293b);
+        }
+        /* إعدادات الطباعة وتصدير PDF لمدراء التوظيف HR */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #0f172a !important;
+                font-size: 11pt;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .glass-panel, .bg-cyber-card, .bg-cyber-surface {
+                background: #ffffff !important;
+                border: 1px solid #cbd5e1 !important;
+                box-shadow: none !important;
+                color: #0f172a !important;
+            }
+            .text-white, .text-slate-200, .text-slate-300, .text-slate-400 {
+                color: #1e293b !important;
+            }
+            .text-emerald-400, .text-cyan-400 {
+                color: #047857 !important;
+                font-weight: bold !important;
+            }
+            section, header {
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="pcb-pattern font-sans antialiased selection:bg-emerald-500 selection:text-slate-950">
+
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b border-slate-800/80 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-mono font-bold">
+                    BS
+                </div>
+                <div>
+                    <span class="font-mono font-bold text-lg tracking-wider text-white block leading-none">BS<span class="text-emerald-400">.Tech</span> <span class="text-xs text-slate-400 font-normal">HUB v2.6</span></span>
+                    <span class="text-[11px] text-slate-400 block mt-0.5">البوابة التقنية والملف المهني الرسمي</span>
+                </div>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-300">
+                <a href="#executive-profile" class="hover:text-emerald-400 transition">الملف التنفيذي</a>
+                <a href="#career-timeline" class="hover:text-emerald-400 transition">السجل المهني (HR)</a>
+                <a href="#skills-matrix" class="hover:text-emerald-400 transition">المصفوفة الهندسية</a>
+                <a href="#projects-hub" class="hover:text-emerald-400 transition flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> بوابة المشاريع والأنظمة
+                </a>
+                <a href="#terminal-lab" class="hover:text-emerald-400 transition">المختبر التفاعلي</a>
+            </div>
+
+            <div class="flex items-center gap-2.5">
+                <button onclick="toggleCommandPalette()" title="لوحة الأوامر السريعة (Ctrl + K)" class="bg-slate-800/90 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg text-xs font-mono border border-slate-700 transition flex items-center gap-2">
+                    <i class="fa-solid fa-terminal text-emerald-400"></i>
+                    <span class="hidden sm:inline">بحث سريع</span>
+                    <kbd class="bg-slate-950 px-1.5 py-0.5 rounded text-[10px] text-slate-400">Ctrl+K</kbd>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold px-3.5 py-2 rounded-lg text-xs border border-slate-700 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-pdf text-rose-400"></i>
+                    <span class="hidden sm:inline">نسخة HR / PDF</span>
+                </button>
+                <a href="#contact-gateway" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-4 py-2 rounded-lg text-xs sm:text-sm transition flex items-center gap-1.5 shadow-lg shadow-emerald-500/20">
+                    <i class="fa-solid fa-headset"></i> تواصل مباشر
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Executive Profile Section -->
+    <header id="executive-profile" class="pt-28 pb-16 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+            
+            <!-- Right Column: Bio & HR Value Proposition -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>SENIOR IT SUPPORT SPECIALIST & HARDWARE/FIRMWARE ENGINEER</span>
+                </div>
+
+                <div class="space-y-2">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+                        باسل محمد الأحمد
+                    </h1>
+                    <p class="text-lg sm:text-xl text-cyan-400 font-bold">
+                        أخصائي دعم فني أول | مهندس صيانة بوردات وفيرموير | مدير نشر أنظمة مؤسسية
+                    </p>
+                </div>
+
+                <p class="text-slate-300 leading-relaxed text-base sm:text-lg border-r-4 border-emerald-500 pr-4 bg-slate-900/40 py-2 rounded-l-lg">
+                    خبرة هندسية وميدانية تتجاوز <strong class="text-white">14 عاماً</strong> في قيادة عمليات الدعم التقني المتقدم، صيانة اللوحات الإلكترونية على مستوى المكونات الدقيقة (<span class="font-mono text-emerald-400">Component-Level</span>)، الهندسة العكسية وبرمجة شرائح <span class="font-mono text-emerald-400">EEPROM / SPI Flash</span>، وأتمتة نشر أنظمة التشغيل والشبكات على نطاق مؤسسي واسع، مع خلفية أكاديمية في إدارة الأعمال تضمن مواءمة الحلول التقنية مع كفاءة التشغيل المؤسسي.
+                </p>
+
+                <!-- Key Info Badges for HR -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1 text-xs text-slate-300">
+                    <div class="glass-panel p-3 rounded-xl flex items-center gap-2.5">
+                        <i class="fa-solid fa-location-dot text-emerald-400 text-base"></i>
+                        <div>
+                            <span class="text-slate-400 block text-[10px]">الموقع الجغرافي</span>
+                            <span class="font-bold text-white">دمشق، سوريا</span>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-3 rounded-xl flex items-center gap-2.5">
+                        <i class="fa-solid fa-building-shield text-cyan-400 text-base"></i>
+                        <div>
+                            <span class="text-slate-400 block text-[10px]">العمل الحالي</span>
+                            <span class="font-bold text-white">وزارة التنمية الإدارية</span>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-3 rounded-xl flex items-center gap-2.5 col-span-2 sm:col-span-1">
+                        <i class="fa-solid fa-graduation-cap text-purple-400 text-base"></i>
+                        <div>
+                            <span class="text-slate-400 block text-[10px]">الدرجة الأكاديمية</span>
+                            <span class="font-bold text-white">إدارة الأعمال — SVU</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap gap-3 pt-2 no-print">
+                    <button onclick="downloadVCard()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-3 rounded-xl transition flex items-center gap-2 shadow-lg shadow-emerald-500/20">
+                        <i class="fa-solid fa-address-card"></i> حفظ بطاقة الاتصال (vCard)
+                    </button>
+                    <a href="#projects-hub" class="bg-cyber-card hover:bg-slate-800 text-white border border-slate-700 font-semibold px-5 py-3 rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-cubes text-cyan-400"></i> استعراض بوابة المشاريع
+                    </a>
+                    <a href="https://wa.me/963931677458?text=مرحباً%20أستاذ%20باسل،%20اطلعت%20على%20ملفك%20المهني%20وأود%20التواصل%20معك" target="_blank" class="bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/30 font-semibold px-4 py-3 rounded-xl transition flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> واتساب مباشر
+                    </a>
+                </div>
+            </div>
+
+            <!-- Left Column: Quantitative Impact Metrics (HR Dashboard Card) -->
+            <div class="lg:col-span-5">
+                <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-800 relative overflow-hidden">
+                    <div class="absolute -top-20 -left-20 w-44 h-44 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+                        <div>
+                            <h2 class="text-white font-bold text-lg">مؤشرات الأداء والكفاءة المهنية</h2>
+                            <p class="text-xs text-slate-400">ملخص تنفيذي موثق لمدراء التوظيف والعمليات</p>
+                        </div>
+                        <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 font-mono text-xs border border-emerald-500/30">VERIFIED</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-slate-950/70 p-4 rounded-2xl border border-slate-800/80">
+                            <span class="text-3xl font-black text-emerald-400 font-mono block">+14</span>
+                            <span class="text-xs text-slate-300 font-semibold mt-1 block">عاماً من الخبرة التقنية</span>
+                            <span class="text-[11px] text-slate-500 block mt-0.5">هاردوير، فيرموير، وأنظمة</span>
+                        </div>
+                        <div class="bg-slate-950/70 p-4 rounded-2xl border border-slate-800/80">
+                            <span class="text-3xl font-black text-cyan-400 font-mono block">+150</span>
+                            <span class="text-xs text-slate-300 font-semibold mt-1 block">نشر أنظمة مؤسسي</span>
+                            <span class="text-[11px] text-slate-500 block mt-0.5">أتمتة Sysprep & Macrium</span>
+                        </div>
+                        <div class="bg-slate-950/70 p-4 rounded-2xl border border-slate-800/80">
+                            <span class="text-3xl font-black text-purple-400 font-mono block">12</span>
+                            <span class="text-xs text-slate-300 font-semibold mt-1 block">عاماً كرئيس قسم صيانة</span>
+                            <span class="text-[11px] text-slate-500 block mt-0.5">إدارة فرق وصيانة بوردات</span>
+                        </div>
+                        <div class="bg-slate-950/70 p-4 rounded-2xl border border-slate-800/80">
+                            <span class="text-3xl font-black text-amber-400 font-mono block">4</span>
+                            <span class="text-xs text-slate-300 font-semibold mt-1 block">تخصصات هندسية مدمجة</span>
+                            <span class="text-[11px] text-slate-500 block mt-0.5">IT, PCB, EEPROM, C# Dev</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-5 border-t border-slate-800/80 space-y-2.5 text-xs">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">نطاق العلامات التجارية (طابعات وحواسيب):</span>
+                            <span class="font-mono text-white font-semibold">Epson, HP, Canon, Brother, Dell, MSI</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">بيئات التشغيل والبرمجة:</span>
+                            <span class="font-mono text-emerald-400 font-semibold">Win11 Enterprise, C#/.NET, PowerShell</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">جاهزية الدعم عن بعد وحلول الطوارئ:</span>
+                            <span class="text-cyan-400 font-bold"><i class="fa-solid fa-circle-check ml-1"></i> متاح عبر AnyDesk / ميداني</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Career Timeline & Academic Qualification (HR Core Section) -->
+    <section id="career-timeline" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+                <span class="text-emerald-400 font-mono text-xs uppercase tracking-widest block mb-1">CAREER & ACADEMIC RECORD</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
+                    <i class="fa-solid fa-briefcase text-emerald-400"></i> السجل المهني والتدرج الوظيفي الموثق
+                </h2>
+            </div>
+            <p class="text-slate-400 text-sm max-w-md">
+                مسيرة مهنية تجمع بين العمل المؤسسي الحكومي، القيادة الميدانية لأقسام الصيانة، وتطوير البرمجيات التقنية المستقلة.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8">
+            <!-- Work Experience Timeline (8 Cols) -->
+            <div class="lg:col-span-8 relative timeline-line pr-10 space-y-8">
+                
+                <!-- Role 1 -->
+                <div class="relative glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
+                    <span class="absolute -right-[33px] top-6 w-4 h-4 rounded-full bg-emerald-400 ring-4 ring-emerald-500/20"></span>
+                    <div class="flex flex-wrap justify-between items-start gap-2 mb-3">
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white">أخصائي دعم فني أول (Senior IT Support Specialist)</h3>
+                            <p class="text-emerald-400 font-semibold text-sm">وزارة التنمية الإدارية — مكتب الدعم التقني (دمشق)</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs">
+                            نيسان 2025 — حتى الآن
+                        </span>
+                    </div>
+                    <ul class="space-y-2 text-slate-300 text-sm list-disc list-inside leading-relaxed">
+                        <li>قيادة عمليات نشر وتعميم أنظمة التشغيل (<span class="font-mono text-xs text-cyan-300">Sysprep, Macrium Reflect, VAMT</span>) وتجهيز أساطيل الحواسيب المحمولة والمكتبية (أكثر من 150 جهازاً) بكفاءة قياسية.</li>
+                        <li>تشخيص وإصلاح الأعطال المعقدة للحواسيب المكتبية والمحمولة، الطابعات الشبكية والليزرية، الماسحات الضوئية، وأجهزة البصمة والحضور (<span class="font-mono text-xs text-cyan-300">ZKTeco</span>).</li>
+                        <li>التنسيق الهندسي مع فرق الشبكات والبنية التحتية لضمان استقرار الخدمات، وتوثيق التقارير الفنية الدورية.</li>
+                    </ul>
+                </div>
+
+                <!-- Role 2 -->
+                <div class="relative glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
+                    <span class="absolute -right-[33px] top-6 w-4 h-4 rounded-full bg-cyan-400 ring-4 ring-cyan-500/20"></span>
+                    <div class="flex flex-wrap justify-between items-start gap-2 mb-3">
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white">مؤسس ومطور حلول تقنية وأنظمة فيرموير</h3>
+                            <p class="text-cyan-400 font-semibold text-sm">مختبر BS.Tech المستقل ومنصة ChiplessBS</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono text-xs">
+                            2024 — حتى الآن
+                        </span>
+                    </div>
+                    <ul class="space-y-2 text-slate-300 text-sm list-disc list-inside leading-relaxed">
+                        <li>تطوير منصة <strong class="text-white">ChiplessBS</strong> بلغة <span class="font-mono text-xs text-emerald-300">C# / .NET</span> لتفليش الفيرموير عن بعد مع تشفير <span class="font-mono text-xs text-emerald-300">AES-256 GCM</span> وربط التراخيص بمعرف العتاد <span class="font-mono text-xs text-emerald-300">HWID</span>.</li>
+                        <li>تقديم خدمات الدعم الفني المتقدم عن بعد عبر <strong class="text-white">AnyDesk</strong> لحل مشاكل الأنظمة، الشبكات، وتصفير وبرمجة الطابعات لعملاء داخل سوريا وخارجها.</li>
+                        <li>ابتكار بيئات إقلاع متنقلة (<span class="font-mono text-xs text-emerald-300">Windows 11 Pro To Go / Native VHDX</span>) للتشخيص الميداني السريع.</li>
+                    </ul>
+                </div>
+
+                <!-- Role 3 -->
+                <div class="relative glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
+                    <span class="absolute -right-[33px] top-6 w-4 h-4 rounded-full bg-purple-400 ring-4 ring-purple-500/20"></span>
+                    <div class="flex flex-wrap justify-between items-start gap-2 mb-3">
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white">رئيس قسم صيانة الطابعات والحواسيب المحمولة</h3>
+                            <p class="text-purple-400 font-semibold text-sm">شركة توب برنت (Top Print) — الحلبوني، دمشق</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 font-mono text-xs">
+                            2012 — 2024 (12 عاماً)
+                        </span>
+                    </div>
+                    <ul class="space-y-2 text-slate-300 text-sm list-disc list-inside leading-relaxed">
+                        <li>إدارة وقيادة قسم الصيانة لمدة 12 عاماً متواصلة، والإشراف على تشخيص وإصلاح آلاف الأجهزة من طابعات حبرية وليزرية وحواسيب محمولة.</li>
+                        <li>التخصص العميق في صيانة اللوحات الإلكترونية على مستوى المكونات الدقيقة (<span class="font-mono text-xs text-purple-300">Micro-Soldering & PCB Diagnostics</span>) وبرمجة شرائح <span class="font-mono text-xs text-purple-300">EEPROM / SPI Flash</span> باستخدام مبرمجات <span class="font-mono text-xs text-purple-300">CH341A & RT809F</span>.</li>
+                        <li>تنفيذ تعديلات الأنظمة المدمجة وتحويل أنظمة الحبر المستمر (<span class="font-mono text-xs text-purple-300">CISS Modifications & Chipless Firmware</span>) لطابعات <span class="font-mono text-xs">Epson, HP PageWide/LaserJet, Canon MAXIFY, Brother</span>.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Academic & Security Credentials Column (4 Cols) -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-user-graduate text-cyan-400"></i> التأهيل الأكاديمي والإداري
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800">
+                            <span class="text-xs font-mono text-emerald-400 block">الجامعة الافتراضية السورية (SVU)</span>
+                            <h4 class="font-bold text-white text-base mt-1">إدارة الأعمال (Business Administration)</h4>
+                            <p class="text-slate-400 text-xs mt-1 leading-relaxed">
+                                دمج الخبرة الهندسية المعمقة مع منهجيات الإدارة الحديثة، التخطيط الاستراتيجي، وإدارة الموارد وتقانة المعلومات.
+                            </p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800">
+                            <span class="text-xs font-mono text-cyan-400 block">التدريب الاحترافي والأمن السيبراني</span>
+                            <h4 class="font-bold text-white text-base mt-1">أمن البيانات والتوعية بالهندسة الاجتماعية</h4>
+                            <p class="text-slate-400 text-xs mt-1 leading-relaxed">
+                                إتمام تدريب مكثف في أمن البيانات (أيار 2026) وإطلاق منصة توعوية تفاعلية لاختبار وتحصين المستخدمين ضد هجمات الاصطياد والهندسة الاجتماعية.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hardware & Lab Equipment Box -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-screwdriver-wrench text-emerald-400"></i> تجهيزات المختبر والأدوات المعتمدة
+                    </h3>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono">
+                        <span class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200">CH341A & RT809F</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200">Pro'sKit MT-1820</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200">HxD Hex Editor</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200">NeoProgrammer</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200">Macrium Reflect</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200">Microsoft VAMT</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200">Wireshark & Nmap</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200">Victoria SSD</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200">Ollama Local AI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engineering Skills Matrix (Filterable for Technical Recruiters) -->
+    <section id="skills-matrix" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="mb-10">
+            <span class="text-cyan-400 font-mono text-xs uppercase tracking-widest block mb-1">COMPETENCY MATRIX</span>
+            <h2 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
+                <i class="fa-solid fa-microchip text-cyan-400"></i> مصفوفة الكفاءات الهندسية والتقنية
+            </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Domain 1 -->
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl mb-4">
+                    <i class="fa-solid fa-memory"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-3">هندسة الفيرموير والـ EEPROM</h3>
+                <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> سحب وتعديل الدامبات (SPI Flash / EEPROM)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> التحليل الست عشري (Hex Patching) وفك التشفير</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> تحويل الطابعات إلى أنظمة Chipless دائمة</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> معالجة أخطاء الإقلاع (Boot-loop Recovery)</li>
+                </ul>
+            </div>
+
+            <!-- Domain 2 -->
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl mb-4">
+                    <i class="fa-solid fa-Wave-square"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-3">صيانة البوردات الدقيقة (PCB)</h3>
+                <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> تتبع مسارات الطاقة والفولتيات على المخططات</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> لحام المكونات السطحية الدقيقة (SMD / Micro-soldering)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> صيانة بوردات اللابتوبات، الطابعات، وأجهزة البصمة</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> صيانة المنظومات الميكانيكية والحرارية المتقدمة</li>
+                </ul>
+            </div>
+
+            <!-- Domain 3 -->
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
+                <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-4">
+                    <i class="fa-solid fa-server"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-3">إدارة ونشر الأنظمة المؤسسية</h3>
+                <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> بناء صور الأنظمة القياسية (Sysprep & Imaging)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> الإقلاع الأصلي من الأقراص الافتراضية (VHDX Boot)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> إدارة التراخيص المؤسسية (VAMT / KMS / MAK)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> أتمتة المهام الإدارية عبر CMD & PowerShell</li>
+                </ul>
+            </div>
+
+            <!-- Domain 4 -->
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 card-hover">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl mb-4">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-3">البرمجة، الشبكات، والذكاء الاصطناعي</h3>
+                <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> تطوير تطبيقات سطح المكتب بـ C# .NET & APIs</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> تشخيص الشبكات وتوجيه البروكسي و DNS الآمن (DoH)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> تشغيل وكلاء الذكاء الاصطناعي محلياً (Ollama / Llama3)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> برمجة المتحكمات الدقيقة وأتمتة المهام (ESP32 / MacroDroid)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CENTRAL ECOSYSTEM HUB (Future Projects Launchpad) -->
+    <section id="projects-hub" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-emerald-500/30">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8 pb-6 border-b border-slate-800">
+                <div>
+                    <div class="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 mb-2">
+                        <i class="fa-solid fa-sitemap"></i> CENTRAL SUB-SYSTEMS & PROJECTS LAUNCHPAD
+                    </div>
+                    <h2 class="text-2xl sm:text-4xl font-black text-white">
+                        بوابة الأنظمة والمشاريع التقنية الفرعية
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-2 max-w-2xl">
+                        المركز الرئيسي لكافة البرمجيات، قواعد البيانات الهندسية، والمبادرات التقنية. كل بطاقة أدناه تمثل مشروعاً متكاملاً يمكن استعراض مواصفاته المعمارية أو الانتقال إلى صفحته المستقلة.
+                    </p>
+                </div>
+
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap gap-2 no-print" id="hub-filters">
+                    <button onclick="filterHub('all')" class="hub-filter-btn active bg-emerald-500 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition">الكل</button>
+                    <button onclick="filterHub('software')" class="hub-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl text-xs transition">البرمجيات والأدوات</button>
+                    <button onclick="filterHub('firmware')" class="hub-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl text-xs transition">الفيرموير والعتاد</button>
+                    <button onclick="filterHub('enterprise')" class="hub-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl text-xs transition">الأنظمة والأمن</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Projects Grid (Rendered via JS for effortless scalability) -->
+            <div id="ecosystem-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+    </section>
+
+    <!-- Interactive Diagnostic & HR CLI Terminal -->
+    <section id="terminal-lab" class="py-12 px-4 sm:px-6 max-w-7xl mx-auto no-print">
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-4 space-y-4">
+                <span class="text-emerald-400 font-mono text-xs uppercase tracking-widest block">INTERACTIVE CONSOLE</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-white">
+                    طرفية الفحص والاستعلام التفاعلي
+                </h2>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    اضغط على أي أمر تشخيصي أدناه لتشغيل محاكاة حية في الطرفية تستعرض خلاصة الملف المهني، حالة مشاريع الفيرموير، أو شجرة البنية التحتية للموقع.
+                </p>
+                <div class="flex flex-col gap-2.5 pt-2">
+                    <button onclick="runTerminalCmd('hr')" class="text-right bg-cyber-card hover:bg-slate-800 border border-slate-700 p-3 rounded-xl text-xs font-mono text-emerald-400 transition flex items-center justify-between">
+                        <span>./query_profile --target="HR_Executive"</span>
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                    <button onclick="runTerminalCmd('eeprom')" class="text-right bg-cyber-card hover:bg-slate-800 border border-slate-700 p-3 rounded-xl text-xs font-mono text-cyan-400 transition flex items-center justify-between">
+                        <span>./chipless_bs --verify-security</span>
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                    <button onclick="runTerminalCmd('tree')" class="text-right bg-cyber-card hover:bg-slate-800 border border-slate-700 p-3 rounded-xl text-xs font-mono text-purple-400 transition flex items-center justify-between">
+                        <span>./hub_router --list-subpages</span>
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="lg:col-span-8">
+                <div class="bg-slate-950 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden font-mono text-xs sm:text-sm" dir="ltr">
+                    <div class="bg-slate-900 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                        <div class="flex gap-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                        </div>
+                        <span class="text-slate-400 text-xs">bassel@bstech-hub:~ (PowerShell / Bash Core)</span>
+                    </div>
+                    <div id="terminal-output" class="p-6 space-y-2 text-slate-300 min-h-[260px] max-h-[320px] overflow-y-auto leading-relaxed">
+                        <p><span class="text-emerald-400">bassel@bstech-hub:~$</span> ./system_status --all</p>
+                        <p class="text-slate-400">[INFO] Initializing BS.Tech Central Ecosystem Hub...</p>
+                        <p class="text-emerald-400">[OK] Engineer: Bassel Mohammed Al-Ahmad (Senior IT Support Specialist)</p>
+                        <p class="text-cyan-400">[OK] Sub-Pages Router: Active & Ready for expansion</p>
+                        <p class="text-amber-400">[TIP] Click any command button on the right to execute live queries.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Remote Support Gateway -->
+    <section id="contact-gateway" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="bg-gradient-to-r from-emerald-950/70 via-cyber-card to-cyber-card rounded-3xl p-8 sm:p-12 border border-emerald-500/40">
+            <div class="grid lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-4">
+                    <span class="text-emerald-400 font-mono text-xs uppercase tracking-widest">DIRECT COMMUNICATION & REMOTE LAB</span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-white">
+                        التواصل المهني وبوابة الدعم الفني عن بعد
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        سواء كنت مسؤول توظيف تبحث عن كفاءة هندسية قيادية، أو عميلاً بحاجة إلى دعم تقني فوري عبر <strong class="text-white">AnyDesk</strong> أو صيانة متقدمة للعتاد والطابعات في دمشق، يمكنك التواصل مباشرة عبر القنوات الرسمية أدناه.
+                    </p>
+                    <div class="flex flex-wrap gap-6 pt-2 text-sm text-slate-200 font-mono">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone-volume text-emerald-400"></i>
+                            <span dir="ltr">0931 677 458</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-map-pin text-cyan-400"></i>
+                            <span>دمشق، سوريا</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3 no-print">
+                    <a href="https://wa.me/963931677458?text=مرحباً%20أستاذ%20باسل،%20أتواصل%20معك%20عبر%20موقعك%20الرسمي%20BS.Tech" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 px-6 rounded-xl text-center transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> مراسلة فورية عبر واتساب
+                    </a>
+                    <button onclick="downloadVCard()" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3.5 px-6 rounded-xl text-center border border-slate-700 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download text-cyan-400"></i> تنزيل بطاقة الأعمال الرقمية (vCard)
+                    </button>
+                    <a href="https://anydesk.com/en/downloads/windows" target="_blank" class="bg-slate-950 hover:bg-slate-900 text-slate-300 font-semibold py-3 px-6 rounded-xl text-center border border-slate-800 transition flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-solid fa-desktop text-rose-500"></i> تحميل برنامج AnyDesk لجلسات الدعم عن بعد
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Architecture Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 no-print">
+        <div class="glass-panel max-w-2xl w-full rounded-3xl border border-emerald-500/40 p-6 sm:p-8 space-y-5 relative">
+            <button onclick="closeProjectModal()" class="absolute top-5 left-5 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center gap-3">
+                <span id="modal-badge" class="text-xs font-mono px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30"></span>
+                <span id="modal-status" class="text-xs font-mono text-slate-400"></span>
+            </div>
+            <h3 id="modal-title" class="text-2xl font-black text-white"></h3>
+            <p id="modal-desc" class="text-slate-300 text-sm leading-relaxed"></p>
+            <div class="bg-slate-950/90 p-4 rounded-2xl border border-slate-800">
+                <span class="text-xs font-mono text-cyan-400 block mb-2">المواصفات الهندسية والمعمارية:</span>
+                <ul id="modal-specs" class="space-y-1.5 text-xs text-slate-300 list-disc list-inside"></ul>
+            </div>
+            <div class="flex flex-wrap gap-3 pt-2">
+                <a id="modal-link" href="#" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-2.5 rounded-xl text-sm transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> فتح صفحة المشروع المستقلة
+                </a>
+                <button onclick="closeProjectModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-5 py-2.5 rounded-xl text-sm transition">
+                    إغلاق المعاينة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Command Palette Modal (Ctrl + K) -->
+    <div id="cmd-palette" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-start justify-center pt-24 p-4 no-print">
+        <div class="glass-panel max-w-xl w-full rounded-2xl border border-slate-700 overflow-hidden shadow-2xl">
+            <div class="p-4 border-b border-slate-800 flex items-center gap-3">
+                <i class="fa-solid fa-magnifying-glass text-emerald-400"></i>
+                <input id="cmd-input" type="text" oninput="filterCommands(this.value)" placeholder="ابحث عن مشروع، مهارة، أو أمر تنفيذي..." class="w-full bg-transparent text-white text-sm focus:outline-none">
+                <button onclick="toggleCommandPalette()" class="text-xs font-mono text-slate-400 bg-slate-900 px-2 py-1 rounded">ESC</button>
+            </div>
+            <div id="cmd-list" class="p-2 max-h-72 overflow-y-auto space-y-1 text-sm"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 py-8 px-4 text-center text-slate-400 text-xs">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="font-bold text-slate-200">باسل محمد الأحمد — البوابة التقنية الرسمية والملف المهني</p>
+            <p class="font-mono">BS.Tech Central Hub Architecture © 2026 | Damascus, Syria</p>
+        </div>
+    </footer>
+
+    <!-- Core Ecosystem & Interactive JavaScript Engine -->
+    <script>
+        /* ============================================================================
+           مصفوفة المشاريع والأنظمة الفرعية (قابلة للتوسع مستقبلاً بإضافة سطر واحد فقط)
+           ============================================================================ */
+        const ecosystemProjects = [
+            {
+                id: 'chipless-bs',
+                title: 'منصة ChiplessBS المؤتمتة',
+                category: 'software',
+                badge: 'C# .NET / AES-256',
+                status: 'Production v2.1',
+                path: './projects/chipless-bs/index.html',
+                icon: 'fa-microchip',
+                color: 'emerald',
+                summary: 'منظومة برمجية لتفليش وتعديل فيرموير الطابعات بدون شرائح، محمية بنظام ربط العتاد HWID وتشفير AES-256 GCM مع تحقق سحابي عبر KeyAuth API.',
+                specs: [
+                    'واجهة عميل مبنية بلغة C# .NET عالية الأداء',
+                    'حماية مشفرة للدامبات بمعيار AES-256 GCM لمنع التسريب أو الهندسة العكسية',
+                    'ربط الترخيص بمعرف اللوحة والمعالج (HWID Binding) عبر KeyAuth API',
+                    'دعم مباشر لعمليات الـ Recovery وتجاوز أخطاء الـ Firmware لطابعات Epson و Canon'
+                ]
+            },
+            {
+                id: 'black-box',
+                title: 'موسوعة الصندوق الأسود الهندسية',
+                category: 'firmware',
+                badge: 'Hardware & EEPROM Docs',
+                status: 'Active Knowledge Base',
+                path: './projects/black-box/index.html',
+                icon: 'fa-box-archive',
+                color: 'cyan',
+                summary: 'المرجع التقني الشامل لإجراءات التشخيص الدقيق، خرائط الفولتيات، أوضاع الصيانة (Service Mode)، ومسارات تعديل الـ EEPROM لكبرى العلامات التجارية.',
+                specs: [
+                    'توثيق كامل لمفاتيح الدخول إلى وضع الصيانة (Service Mode) لطابعات Epson, HP, Canon, Brother',
+                    'خرائط فحص الفولتيات ومسارات التغذية على اللوحات المنطقية (Logic Boards)',
+                    'أرشيف دامبات قياسية (Clean Dumps) جاهزة للكتابة عبر مبرمجة CH341A و RT809F',
+                    'بروتوكولات إصلاح أعطال الإقلاع لأجهزة البصمة ZKTeco Xi Face 2000'
+                ]
+            },
+            {
+                id: 'fleet-deploy',
+                title: 'منظومة النشر المؤسسي السريع (150+ Fleet)',
+                category: 'enterprise',
+                badge: 'Sysprep / VHDX / VAMT',
+                status: 'Enterprise Verified',
+                path: './projects/fleet-deploy/index.html',
+                icon: 'fa-server',
+                color: 'purple',
+                summary: 'معمارية متكاملة لأتمتة نشر وتعميم أنظمة Windows 11 Pro وتفعيلها مركزياً على مئات الحواسيب المحمولة والمكتبية بوقت قياسي.',
+                specs: [
+                    'بناء صور أنظمة قياسية معزولة التعريفات عبر Sysprep و Macrium Reflect',
+                    'بيئة صيانة متنقلة Windows 11 Pro 26H2 To Go على ذواكر Type-C فائقة السرعة',
+                    'إدارة وتفعيل التراخيص المؤسسية أوفلاين وأونلاين عبر أداة Microsoft VAMT',
+                    'سكريبتات PowerShell & CMD لتثبيت الحزم الأمنية وضبط السياسات تلقائياً'
+                ]
+            },
+            {
+                id: 'security-awareness',
+                title: 'منصة الوعي الأمني والهندسة الاجتماعية',
+                category: 'enterprise',
+                badge: 'Cybersecurity Lab',
+                status: 'Live Sub-Portal',
+                path: './projects/security-awareness/index.html',
+                icon: 'fa-user-shield',
+                color: 'amber',
+                summary: 'مبادرة تقنية تفاعلية لتعليم واختبار الوعي الأمني ضد هجمات الاصطياد (Phishing) والهندسة الاجتماعية وحماية بيانات المؤسسات.',
+                specs: [
+                    'محاكاة واقعية لسيناريوهات الهندسة الاجتماعية لتحصين الموظفين والمستخدمين',
+                    'إرشادات عملية لتأمين الحسابات وتطبيق المصادقة المتعددة وتشفير الاتصالات',
+                    'تطبيق مبادئ أمن البيانات المكتسبة من التدريب التخصصي المكثف (أيار 2026)'
+                ]
+            },
+            {
+                id: 'local-ai-agent',
+                title: 'وكيل الذكاء الاصطناعي المحلي للتشخيص',
+                category: 'software',
+                badge: 'Ollama / Llama 3 / RAG',
+                status: 'R&D Lab',
+                path: './projects/local-ai/index.html',
+                icon: 'fa-brain',
+                color: 'emerald',
+                summary: 'معمارية وكيل ذكي يعمل محلياً بالكامل (Local-First) دون إنترنت لتحليل أكواد C# واسترجاع حلول أعطال الهاردوير من قاعدة البيانات الخاصة.',
+                specs: [
+                    'تشغيل نماذج Llama 3 محلياً عبر محرك Ollama لضمان الخصوصية المطلقة للبيانات',
+                    'ربط بقاعدة بيانات متجهة (Vector Embeddings) لمرجع الصندوق الأسود التقني',
+                    'مساندة فورية في كتابة وتدقيق سكريبتات PowerShell وتحليل سجلات الأعطال'
+                ]
+            },
+            {
+                id: 'bstech-remote',
+                title: 'بوابة BS.Tech للدعم الفوري عن بعد',
+                category: 'software',
+                badge: 'AnyDesk / Client Portal',
+                status: 'Commercial Service',
+                path: './projects/remote-support/index.html',
+                icon: 'fa-headset',
+                color: 'cyan',
+                summary: 'واجهة خدمة العملاء المخصصة لحجز جلسات الصيانة البرمجية عن بعد عبر AnyDesk وتنسيق مواعيد الصيانة الميدانية للهاردوير.',
+                specs: [
+                    'نظام توجيه مباشر لطلبات الصيانة إلى واتساب مع توصيف العطل المبدئي',
+                    'إرشادات سريعة للعميل لتجهيز اتصال AnyDesk وتفويض الصلاحيات بأمان',
+                    'قائمة خدمات واضحة تشمل تصفير الطابعات، إصلاح الأنظمة، وحل مشاكل الشبكات'
+                ]
+            }
+        ];
+
+        // Render Projects Grid
+        function renderHub(filter = 'all') {
+            const grid = document.getElementById('ecosystem-grid');
+            const filtered = filter === 'all' ? ecosystemProjects : ecosystemProjects.filter(p => p.category === filter);
+            
+            grid.innerHTML = filtered.map(p => `
+                <div class="bg-slate-950/80 rounded-2xl p-6 border border-slate-800 card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-${p.color}-500/10 text-${p.color}-400 border border-${p.color}-500/30">
+                                ${p.badge}
+                            </span>
+                            <i class="fa-solid ${p.icon} text-slate-500 text-lg"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">${p.title}</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-5">${p.summary}</p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between gap-2">
+                        <button onclick="openProjectModal('${p.id}')" class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-info"></i> المعاينة المعمارية
+                        </button>
+                        <a href="${p.path}" class="text-xs font-mono bg-slate-900 hover:bg-slate-800 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+                            <span>فتح البوابة</span>
+                            <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterHub(category) {
+            document.querySelectorAll('.hub-filter-btn').forEach(btn => {
+                btn.className = 'hub-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl text-xs transition';
+            });
+            event.target.className = 'hub-filter-btn active bg-emerald-500 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition';
+            renderHub(category);
+        }
+
+        // Modal Handlers
+        function openProjectModal(id) {
+            const p = ecosystemProjects.find(item => item.id === id);
+            if (!p) return;
+            document.getElementById('modal-badge').textContent = p.badge;
+            document.getElementById('modal-status').textContent = p.status;
+            document.getElementById('modal-title').textContent = p.title;
+            document.getElementById('modal-desc').textContent = p.summary;
+            document.getElementById('modal-specs').innerHTML = p.specs.map(s => `<li>${s}</li>`).join('');
+            document.getElementById('modal-link').href = p.path;
+            document.getElementById('project-modal').classList.remove('hidden');
+        }
+
+        function closeProjectModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+        }
+
+        // Interactive Terminal Simulator
+        function runTerminalCmd(type) {
+            const out = document.getElementById('terminal-output');
+            let html = '';
+            if (type === 'hr') {
+                html = `
+                    <p><span class="text-emerald-400">bassel@bstech-hub:~$</span> ./query_profile --target="HR_Executive"</p>
+                    <p class="text-cyan-400">------------------------------------------------------------</p>
+                    <p class="text-white font-bold">CANDIDATE: Bassel Mohammed Al-Ahmad (Born: 1994, Damascus)</p>
+                    <p class="text-emerald-400">CURRENT ROLE: Technical Support Specialist @ Ministry of Administrative Development</p>
+                    <p class="text-slate-300">PRIOR LEADERSHIP: 12 Years Head of Maintenance Dept @ Top Print</p>
+                    <p class="text-purple-400">EDUCATION: Business Administration — Syrian Virtual University (SVU)</p>
+                    <p class="text-amber-400">CORE VALUE: Bridges deep PCB/Firmware engineering with enterprise IT governance.</p>
+                    <p class="text-cyan-400">------------------------------------------------------------</p>
+                `;
+            } else if (type === 'eeprom') {
+                html = `
+                    <p><span class="text-emerald-400">bassel@bstech-hub:~$</span> ./chipless_bs --verify-security</p>
+                    <p class="text-slate-400">[INIT] Loading ChiplessBS .NET Core Module...</p>
+                    <p class="text-emerald-400">[AUTH] KeyAuth API Handshake: VERIFIED (HWID Bound)</p>
+                    <p class="text-cyan-400">[CRYPTO] Payload Decryption: AES-256-GCM Integrity OK</p>
+                    <p class="text-amber-400">[HARDWARE] Programmer Bus: CH341A / RT809F Ready for SPI Flash</p>
+                `;
+            } else if (type === 'tree') {
+                html = `
+                    <p><span class="text-emerald-400">bassel@bstech-hub:~$</span> ./hub_router --list-subpages</p>
+                    <p class="text-slate-300">├── /index.html (Main Executive CV & Portal)</p>
+                    <p class="text-emerald-400">├── /projects/chipless-bs/index.html</p>
+                    <p class="text-cyan-400">├── /projects/black-box/index.html</p>
+                    <p class="text-purple-400">├── /projects/fleet-deploy/index.html</p>
+                    <p class="text-amber-400">├── /projects/security-awareness/index.html</p>
+                    <p class="text-emerald-400">└── /projects/remote-support/index.html</p>
+                `;
+            }
+            out.innerHTML = html;
+            out.scrollTop = out.scrollHeight;
+        }
+
+        // Dynamic vCard (.vcf) Generator for HR & Clients
+        function downloadVCard() {
+            const vcard = [
+                'BEGIN:VCARD',
+                'VERSION:3.0',
+                'FN:باسل محمد الأحمد (Bassel Al-Ahmad)',
+                'N:الأحمد;باسل;محمد;;',
+                'ORG:BS.Tech Engineering / وزارة التنمية الإدارية',
+                'TITLE:Senior IT Support Specialist & Firmware Engineer',
+                'TEL;TYPE=CELL,VOICE:+963931677458',
+                'ADR;TYPE=WORK:;;دمشق;دمشق;;سوريا;',
+                'NOTE:خبرة +14 عاماً في الدعم التقني المتقدم، صيانة البوردات الدقيقة، برمجة الفيرموير وإدارة الأنظمة المؤسسية.',
+                'END:VCARD'
+            ].join('\n');
+
+            const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Bassel_Alahmad_CV_Contact.vcf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Command Palette Logic
+        const quickCommands = [
+            { label: 'طباعة السيرة الذاتية أو حفظها كملف PDF (خاص بالـ HR)', icon: 'fa-file-pdf', action: () => window.print() },
+            { label: 'تنزيل بطاقة الاتصال الرقمية (vCard)', icon: 'fa-address-card', action: () => downloadVCard() },
+            { label: 'الانتقال إلى السجل المهني والتدرج الوظيفي', icon: 'fa-briefcase', action: () => location.href = '#career-timeline' },
+            { label: 'استعراض بوابة المشاريع والأنظمة الفرعية', icon: 'fa-sitemap', action: () => location.href = '#projects-hub' },
+            { label: 'معاينة معمارية: منصة ChiplessBS', icon: 'fa-microchip', action: () => openProjectModal('chipless-bs') },
+            { label: 'معاينة معمارية: موسوعة الصندوق الأسود', icon: 'fa-box-archive', action: () => openProjectModal('black-box') },
+            { label: 'التواصل المباشر عبر واتساب', icon: 'fa-brands fa-whatsapp', action: () => window.open('https://wa.me/963931677458', '_blank') }
+        ];
+
+        function toggleCommandPalette() {
+            const modal = document.getElementById('cmd-palette');
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden')) {
+                document.getElementById('cmd-input').value = '';
+                filterCommands('');
+                document.getElementById('cmd-input').focus();
+            }
+        }
+
+        function filterCommands(q) {
+            const list = document.getElementById('cmd-list');
+            const matches = quickCommands.filter(c => c.label.toLowerCase().includes(q.toLowerCase()));
+            list.innerHTML = matches.map((c, idx) => `
+                <button onclick="executeCommand(${idx})" class="w-full text-right px-4 py-3 rounded-xl hover:bg-slate-800/90 text-slate-200 flex items-center justify-between transition">
+                    <span class="flex items-center gap-3">
+                        <i class="fa-solid ${c.icon} text-emerald-400"></i>
+                        <span>${c.label}</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-left text-xs text-slate-500"></i>
+                </button>
+            `).join('');
+        }
+
+        function executeCommand(index) {
+            toggleCommandPalette();
+            quickCommands[index].action();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                toggleCommandPalette();
+            } else if (e.key === 'Escape') {
+                document.getElementById('cmd-palette').classList.add('hidden');
+                closeProjectModal();
+            }
+        });
+
+        // Initialize Hub on Load
+        document.addEventListener('DOMContentLoaded', () => renderHub('all'));
+    </script>
+</body>
+</html>
